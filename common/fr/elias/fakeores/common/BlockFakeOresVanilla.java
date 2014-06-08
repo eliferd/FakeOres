@@ -55,7 +55,7 @@ public class BlockFakeOresVanilla extends Block
 		case 7:
 			return Blocks.lapis_ore.getIcon(side, metadata);
 		default:
-			return Blocks.stone.getIcon(side, metadata); // Unknown icon, bug !
+			return Blocks.stone.getIcon(side, metadata);
 		}
 	}
 
@@ -168,21 +168,20 @@ public class BlockFakeOresVanilla extends Block
 	public int quantityDropped(Random par1Random)
 	{
 		return 0;
-	} // BugFix 2
+	}
 
 	public int idPicked(World world, int par2, int par3, int par4)
 	{
 		return 0;
-	} // BugFix 3
+	}
 	
     public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
     {
     	return false;
-    } // BugFix 4
+    }
 	
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iiconRegister)
     {
-    	//Empty, only using vanilla icon
     }
 }
