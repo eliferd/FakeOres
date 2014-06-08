@@ -25,7 +25,6 @@ archivesBaseName = "fakeores"
 
 if (System.getenv().BUILD_NUMBER) {
     project.buildnumber = System.getenv().BUILD_NUMBER
-	version += "." + System.getenv().BUILD_NUMBER
 }
 else {
     logger.lifecycle "SETTING BUILDNUMBER TO 0"
@@ -51,13 +50,10 @@ sourceSets {
 
 jar {
     appendix = 'universal'
+	version = "${project.version}-mc${project.minecraft.version}"
 	if (System.getenv().BUILD_NUMBER) {
-       version = "${project.version}-mc${project.minecraft.version}-B{project.buildnumber}"
+		version += "-B" + System.getenv().BUILD_NUMBER
     }
-    else {
-       version = "${project.version}-mc${project.minecraft.version}"
-    }
-    
 }
 
 processResources
