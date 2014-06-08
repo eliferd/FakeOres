@@ -17,7 +17,6 @@ public class SecondBiomeGenOreDimension extends BiomeGenOreDimension
 		super(par1);
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
-		this.spawnableWaterCreatureList.clear();
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityBlackMage.class, 6, 1, 1));
 		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityMutantMonster.class, 12, 1, 3));
