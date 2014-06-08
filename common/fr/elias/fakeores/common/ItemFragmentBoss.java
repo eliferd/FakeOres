@@ -18,11 +18,10 @@ public class ItemFragmentBoss extends Item {
 
 	public ItemFragmentBoss() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) 
     {
-    	par3List.add("MAKE SURE YOU ARE IN A SAFE AREA TO SPAWN THE BOSS !");
+    	par3List.add("MAKE SURE YOU'RE IN A SAFE AREA TO SPAWN ORE BOSS !");
     	super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
     }
     @SideOnly(Side.CLIENT)

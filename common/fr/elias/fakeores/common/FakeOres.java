@@ -24,6 +24,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fr.elias.fakeores.client.TickClientHandlerEvent;
 import fr.elias.fakeores.dimension.BiomeGenOreDimension;
 import fr.elias.fakeores.dimension.BlockBase;
@@ -42,7 +44,14 @@ public class FakeOres
 	public static FakeOres instance;
 
 	public static DamageSource antiorestone;
-	public static final CreativeTabs fakeOresTab = new FakeOresCreativeTab("fakeorestab");
+	public static final CreativeTabs fakeOresTab = new CreativeTabs("fakeorestab")
+	{
+	    public Item getTabIconItem()
+	    {
+	        return FakeOres.antiOresBlade;
+	    }
+		
+	};
 	
 	protected static final BiomeGenBase.Height height_fd_Biome = new BiomeGenBase.Height(0.0F, 0.5F);
 	
@@ -272,7 +281,7 @@ public class FakeOres
 			addEntity(EntityUraniumOre.class, "UraniumOre", mob_uraniumOreID);
 		}
 		addEntity(EntityOresBoss.class, "OresBoss", mob_OreBOSSID);
-		addEntity(EntityBossTeleporter.class, "BossTeleporter", mob_BOSS_TELEPORTER_ID);
+		EntityRegistry.registerModEntity(EntityBossTeleporter.class, "BossTeleporter", mob_BOSS_TELEPORTER_ID, this, 40, 1, true);
 		addEntity(EntityPlayerHunter.class, "PlayerHunter", mob_PLAYER_HUNTER_ID);
 		addEntity(EntityFlyer.class, "Flyer", mob_FLYER_ID);
 		EntityRegistry.registerModEntity(EntityFlyer_Shield.class, "Flyer_Shield", mob_FLYER_SHIELD_ID, this, 40, 1, true);
