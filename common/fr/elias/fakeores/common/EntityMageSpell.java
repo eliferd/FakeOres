@@ -63,9 +63,10 @@ public class EntityMageSpell extends EntityCreature
     {
     	if(rand.nextInt(20) == 0)
     	{
-        	player.attackEntityFrom(DamageSource.magic, 0.5F);
+        	player.attackEntityFrom(DamageSource.causeMobDamage(this), 0.5F);
     	}
     	player.motionZ = rand.nextFloat() * 2.0F - 1.0F;
+    	player.motionY = rand.nextFloat() * 2.0F - 1.0F;
     	player.motionX = rand.nextFloat() * 2.0F - 1.0F;
     	this.setPosition(player.posX, player.posY, player.posZ);
     	this.spawnExplosionParticle();

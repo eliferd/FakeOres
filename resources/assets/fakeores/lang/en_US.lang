@@ -17,6 +17,10 @@ entity.OresBoss.name=Ores Boss
 entity.PlayerHunter.name=Player Hunter
 entity.Flyer.name=Flyer Demon
 entity.Schaza.name=Schaza
+entity.SwimmingAnimal.name=Swimming Animal
+entity.MutantMonster.name=Mutant Monster
+entity.BlackMage.name=Black Mage
+entity.MageSpell.name=Mage Spell (Black Mage)
 
 #items
 item.antiOresBlade.name=Anti Ores Blade
@@ -27,14 +31,11 @@ item.bossframe_part4.name=Boss Fragment Part 4
 item.boss_frame.name=Ore BOSS Invoquer
 item.oreBoss_Star.name=Ore BOSS Energy Star
 item.fakeOres_finder.name=Fake ores finder
-
 item.fd_blurk_ingot.name=Blurk Ingot
 item.fd_daren_ingot.name=Daren Ingot
 item.fd_purlight_ingot.name=Purlight Ingot
 item.fd_rainbow_ingot.name=Rainbow Ingot
-
 item.fd_passcard_schaza.name=Pass Card (Needed to mount Schaza)
-
 
 #blocks
 tile.fakeDiamondOre.name=Fake Ore
@@ -49,7 +50,6 @@ tile.fakeCopper.name=Fake Ore
 tile.fakeTin.name=Fake Ore
 tile.fakeUranium.name=Fake Ore
 tile.antiOreStone.name=Anti Ore Stone
-
 tile.fd_grass.name=Fake Dimension Grass
 tile.fd_second_grass.name=Fake Dimension Grass
 tile.fd_dirt.name=Fake Dimension Dirt
@@ -57,12 +57,10 @@ tile.fd_stone.name=Fake Dimension Stone
 tile.fd_cobblestone.name=Fake Dimension Cobblestone
 tile.fd_redobsidian.name=Cooked Obsidian
 tile.fd_portal.name=Portal
-
 tile.fd_blurk_ore.name=Blurk Ore
 tile.fd_daren_ore.name=Daren Ore
 tile.fd_purlight_ore.name=Purlight Ore
 tile.fd_rainbow_ore.name=Rainbow Ore
-
 tile.fd_blurk_block.name=Blurk Block
 tile.fd_daren_block.name=Daren Block
 tile.fd_purlight_block.name=Purlight Block
