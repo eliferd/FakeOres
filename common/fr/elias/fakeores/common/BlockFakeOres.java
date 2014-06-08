@@ -3,15 +3,17 @@ package fr.elias.fakeores.common;
 import java.util.Random;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -25,6 +27,10 @@ public class BlockFakeOres extends Block {
 
 	 public void onBlockDestroyedByPlayer(World par1World, int x, int y, int z, int metaData) 
 	 {
+		 if(FMLCommonHandler.instance().getEffectiveSide().isClient() && par1World.difficultySetting == EnumDifficulty.PEACEFUL)
+		 {
+			 FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText("Your Minecraft is in peaceful mode. All fake ores are now disabled. Please change your difficulty setting."));
+		 }
 		 if(!par1World.isRemote)
 		 {
 				if(Loader.isModLoaded("IC2"))

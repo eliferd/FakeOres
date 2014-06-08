@@ -11,10 +11,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -57,6 +61,10 @@ public class BlockFakeOresVanilla extends Block
 
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metadata)
 	{
+		if(FMLCommonHandler.instance().getEffectiveSide().isClient() && world.difficultySetting == EnumDifficulty.PEACEFUL)
+		{
+			FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText("Your Minecraft is in peaceful mode. All fake ores are now disabled. Please change your difficulty setting."));
+		}
 		if(!world.isRemote)
 		{
 			if(metadata == 0)
