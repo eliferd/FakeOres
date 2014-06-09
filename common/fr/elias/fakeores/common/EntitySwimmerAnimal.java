@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntitySwimmerAnimal extends EntityWaterMob 
+public class EntitySwimmerAnimal extends CUSTOM_EntityWaterMob 
 {
     public float squidPitch;
     public float prevSquidPitch;
@@ -32,7 +32,7 @@ public class EntitySwimmerAnimal extends EntityWaterMob
 		super(par1World);
         this.rotationVelocity = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
         this.size = rand.nextInt(2) == 0 ? 1.0F : 0.3F;
-        this.setSize(size, size);
+        this.setSize(size - 0.2F, size - 0.2F);
 	}
     protected void applyEntityAttributes()
     {
@@ -44,7 +44,6 @@ public class EntitySwimmerAnimal extends EntityWaterMob
     {
         return null;
     }
-
     /**
      * Returns the sound this mob makes when it is hurt.
      */
@@ -76,14 +75,17 @@ public class EntitySwimmerAnimal extends EntityWaterMob
     
     protected boolean canTriggerWalking()
     {
-        return false;
+        return true;
     }
     
     public boolean isInWater()
     {
-        return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.6000000238418579D, 0.0D), Material.water, this);
+        return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.3D, 0.0D), Material.water, this);
     }
-    
+    public void onUpdate()
+    {
+    	super.onUpdate();
+    }
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
@@ -104,7 +106,6 @@ public class EntitySwimmerAnimal extends EntityWaterMob
         if (this.isInWater())
         {
             float f;
-
             if (this.squidRotation < (float)Math.PI)
             {
                 f = this.squidRotation / (float)Math.PI;
@@ -171,15 +172,19 @@ public class EntitySwimmerAnimal extends EntityWaterMob
             this.randomMotionVecY = -0.1F + this.rand.nextFloat() * 0.2F;
             this.randomMotionVecZ = MathHelper.sin(f) * 0.2F;
         }
-
+        if(this.size == 1.0F && this.motionX == 0F && this.motionZ == 0F && rand.nextInt(1000) == 0)
+        {
+        	EntitySwimmerAnimal spawnBaby = new EntitySwimmerAnimal(worldObj);
+        	spawnBaby.size = 0.3F;
+        	spawnBaby.mountEntity(this);
+        	spawnBaby.setPosition(posX, posY + 1, posZ);
+        	worldObj.spawnEntityInWorld(spawnBaby);
+        	this.spawnExplosionParticle();
+        }
         this.despawnEntity();
     }
-
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
     public boolean getCanSpawnHere()
     {
-        return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
+        return this.worldObj.handleMaterialAcceleration(boundingBox, Material.water, this)&& rand.nextInt(65) == 0 && super.getCanSpawnHere();
     }
 }
