@@ -18,8 +18,12 @@ public class SecondBiomeGenOreDimension extends BiomeGenOreDimension
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableCaveCreatureList.clear();
-		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityBlackMage.class, 6, 1, 1));
-		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityMutantMonster.class, 12, 1, 3));
+		if(FakeOres.spawn_BlackMage){
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityBlackMage.class, 6, 1, 1));
+		}
+		if(FakeOres.spawn_MutantMonster){
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityMutantMonster.class, 12, 1, 3));
+		}
 		this.topBlock = FakeOres.fd_second_grass;
 		this.fillerBlock = FakeOres.fd_dirt;
 		this.rainfall = 0.0F;

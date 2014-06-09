@@ -24,8 +24,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import fr.elias.fakeores.client.TickClientHandlerEvent;
 import fr.elias.fakeores.dimension.BiomeGenOreDimension;
 import fr.elias.fakeores.dimension.BlockBase;
@@ -50,7 +48,6 @@ public class FakeOres
 	    {
 	        return FakeOres.antiOresBlade;
 	    }
-		
 	};
 	
 	protected static final BiomeGenBase.Height height_fd_Biome = new BiomeGenBase.Height(0.0F, 0.5F);
@@ -121,6 +118,13 @@ public class FakeOres
 			   mob_REGEN_EGG_ID,
 			   mob_MUTANT_MONSTER_ID,
 			   mob_SWIMMER_ANIMAL_ID;
+	public static boolean spawn_PlayerHunter,
+				   		  spawn_Flyer,
+				   		  spawn_Schaza,
+				   		  spawn_RegenEgg,
+				   		  spawn_SwimmerAnimal,
+				   		  spawn_BlackMage,
+				   		  spawn_MutantMonster;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -157,6 +161,14 @@ public class FakeOres
 			mob_REGEN_EGG_ID = config.get("Entity", "Regeneration Egg ID", 379).getInt();
 			mob_MUTANT_MONSTER_ID = config.get("Entity", "Mutant Monster ID", 380).getInt();
 			mob_SWIMMER_ANIMAL_ID = config.get("Entity", "Swimmer Animal ID", 381).getInt();
+			
+			spawn_PlayerHunter = config.get("Spawn", "Spawn Player Hunter", true).getBoolean(true);
+			spawn_Flyer = config.get("Spawn", "Spawn Flyer", true).getBoolean(true);
+			spawn_Schaza = config.get("Spawn", "Spawn Schaza", true).getBoolean(true);
+			spawn_RegenEgg = config.get("Spawn", "Spawn Regeneration Egg", true).getBoolean(true);
+			spawn_SwimmerAnimal = config.get("Spawn", "Spawn Swimmer Animal", true).getBoolean(true);
+			spawn_BlackMage = config.get("Spawn", "Spawn Black Mage", true).getBoolean(true);
+			spawn_MutantMonster = config.get("Spawn", "Spawn Mutant Monster", true).getBoolean(true);
 			config.save();
 		} finally {
 			if(config.hasChanged())

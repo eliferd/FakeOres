@@ -24,11 +24,26 @@ public class BiomeGenOreDimension extends BiomeGenBase
 		this.spawnableCreatureList.clear();
 		this.spawnableWaterCreatureList.clear();
 		this.spawnableCaveCreatureList.clear();
-		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityPlayerHunter.class, 12, 1, 2));
-		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityFlyer.class, 12, 2, 5));
-		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySchaza.class, 12, 2, 8));
-		this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityRegenEgg.class, 5, 1, 1));
-		this.spawnableWaterCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySwimmerAnimal.class, 12, 8, 16));
+		if(FakeOres.spawn_PlayerHunter)
+		{
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityPlayerHunter.class, 12, 1, 2));
+		}
+		if(FakeOres.spawn_Flyer)
+		{
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityFlyer.class, 12, 2, 5));
+		}
+		if(FakeOres.spawn_Schaza)
+		{
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySchaza.class, 12, 2, 8));
+		}
+		if(FakeOres.spawn_RegenEgg)
+		{
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityRegenEgg.class, 5, 1, 1));
+		}
+		if(FakeOres.spawn_SwimmerAnimal)
+		{
+			this.spawnableWaterCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySwimmerAnimal.class, 12, 8, 16));
+		}
 		this.topBlock = FakeOres.fd_grass;
 		this.fillerBlock = FakeOres.fd_dirt;
 		this.setBiomeName("FakeOresBiome");
