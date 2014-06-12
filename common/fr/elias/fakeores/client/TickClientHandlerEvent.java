@@ -27,6 +27,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -38,11 +39,11 @@ public class TickClientHandlerEvent
 {
 	public Random random = new Random();
 	public Minecraft mc;
+	private static TickClientHandlerEvent INSTANCE = new TickClientHandlerEvent();
 	public TickClientHandlerEvent()
 	{
 		mc = Minecraft.getMinecraft();
 	}
-	
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent clientTick)
 	{
@@ -91,4 +92,8 @@ public class TickClientHandlerEvent
 			}
 		}
 	 }
+	public static TickClientHandlerEvent instance()
+	{
+		return INSTANCE;
+	}
 }

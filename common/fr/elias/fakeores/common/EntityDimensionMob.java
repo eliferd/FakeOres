@@ -20,11 +20,13 @@ public class EntityDimensionMob extends EntityCreature
 {
 	public boolean isHostile;
 	public static Item droppedItems[];
+	public boolean isBloodable;
     public EntityDimensionMob(World par1World)
     {
         super(par1World);
         this.experienceValue = 5;
         isHostile = false;
+        isBloodable = true;
     }
 
     /**
@@ -36,7 +38,22 @@ public class EntityDimensionMob extends EntityCreature
         this.updateArmSwingProgress();
         super.onLivingUpdate();
     }
-
+    public void onUpdate()
+    {
+        if(getHealth() < 7.5F && worldObj.isRemote)
+        {
+        	blood();
+        }
+        super.onUpdate();
+    }
+    public void blood()
+    {
+    	if(isBloodable)
+    	{
+    		FakeOres.proxy.spawnParticle(worldObj, "blood", posX, posY + 1, posZ);
+    	}
+    }
+    
     protected String getSwimSound()
     {
         return "game.hostile.swim";

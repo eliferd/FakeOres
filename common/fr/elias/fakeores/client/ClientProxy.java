@@ -1,7 +1,14 @@
 package fr.elias.fakeores.client;
 
+import java.util.Random;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Loader;
 import fr.elias.fakeores.common.EntityBlackMage;
@@ -62,5 +69,16 @@ public class ClientProxy extends StaticProxy {
 			RenderingRegistry.registerEntityRenderingHandler(EntityUraniumOre.class, new RenderOre(new ModelOre()));
 		}
 	}
-	
+	public void spawnParticle(World world, String name, double x, double y, double z)
+	{
+		EntityFX fx = null;
+		if(name == "smoke")
+		{
+			fx = new EntityCustomSmokeFX(world, x, y, z, 0.0D, 0.0D, 0.0D, 1F, FakeOres.texture_CustomSmokeFX_particle.getIconFromDamage(0));
+		}else if(name == "blood")
+		{
+			fx = new EntityBloodFX(world, x, y, z, 1F, FakeOres.texture_BloodFX_particle.getIconFromDamage(0));
+		}
+		Minecraft.getMinecraft().effectRenderer.addEffect(fx);
+	}
 }

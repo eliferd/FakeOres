@@ -52,11 +52,15 @@ public class FakeOres
 	
 	protected static final BiomeGenBase.Height height_fd_Biome = new BiomeGenBase.Height(0.0F, 0.5F);
 	
+	public static Item texture_CustomSmokeFX_particle,
+					   texture_BloodFX_particle;
+	
+	public static FD_BlockGrass fd_grass;
+	
 	public static Block fakeOreVanilla,
 	 					fakeCopper, 
 	 					fakeTin, 
 						fakeUranium,
-						fd_grass, 
 						fd_dirt, 
 						fd_stone, 
 						fd_cobblestone,
@@ -196,7 +200,7 @@ public class FakeOres
 		fd_passcard_schaza = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("fd_passcard_schaza").setTextureName("fakeores:passcard_schaza");
 		/** INIT PART [BLOCKS] **/
 		fakeOreVanilla = new BlockFakeOresVanilla().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockName("fakeOre");
-		fd_grass = new FD_BlockGrass("fakeores:oredimension_grass_top", "fakeores:oredimension_grass_side", this.fd_dirt, this.fd_grass).setHardness(0.6F).setStepSound(Block.soundTypeGrass).setBlockName("fd_grass");
+		fd_grass = (FD_BlockGrass) new FD_BlockGrass("fakeores:oredimension_grass_top", "fakeores:oredimension_grass_side", this.fd_dirt, this.fd_grass).setHardness(0.6F).setStepSound(Block.soundTypeGrass).setBlockName("fd_grass");
 		fd_second_grass = new FD_BlockGrass("fakeores:oredimension_second_grass_top", "fakeores:oredimension_second_grass_side", this.fd_dirt, this.fd_second_grass).setHardness(0.6F).setStepSound(Block.soundTypeGrass).setBlockName("fd_second_grass");
 		fd_dirt = new BlockBase(Material.ground).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("fd_dirt").setBlockTextureName("fakeores:oredimension_dirt");
 		fd_stone =  new BlockBase(Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypePiston).setBlockName("fd_stone").setBlockTextureName("fakeores:oredimension_stone");
@@ -264,14 +268,20 @@ public class FakeOres
 		secondODBiome = new SecondBiomeGenOreDimension(secondBiomeID).setBiomeName("FakeOresBiome_2").setHeight(height_fd_Biome).setDisableRain();
 		DimensionManager.registerProviderType(dimID, FD_WorldProvider.class, false);
 		DimensionManager.registerDimension(dimID, dimID);
-		
 		if(event.getSide().isClient())
 		{
 			FMLCommonHandler.instance().bus().register(new TickClientHandlerEvent());
 			MinecraftForge.EVENT_BUS.register(new TickClientHandlerEvent());
 		}
+		
 		antiorestone = new AntiOreStoneDamageSource("destroyedby");
 		GameRegistry.registerWorldGenerator(new WorldGenFakeOres(), 0);
+		
+		/** PARTICLE PART **/
+		texture_CustomSmokeFX_particle = new ItemParticleTexture().setUnlocalizedName("texture_CustomSmokeFX_particle").setTextureName("fakeores:customsmoke");
+		texture_BloodFX_particle = new ItemParticleTexture().setUnlocalizedName("texture_BloodFX_particle").setTextureName("fakeores:bloodfx");
+		GameRegistry.registerItem(texture_CustomSmokeFX_particle, "texture_CustomSmokeFX_particle");
+		GameRegistry.registerItem(texture_BloodFX_particle, "texture_BloodFX_particle");
 	}
 
 	@EventHandler
