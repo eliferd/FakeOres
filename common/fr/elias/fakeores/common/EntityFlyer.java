@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;

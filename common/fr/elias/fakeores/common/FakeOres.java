@@ -120,16 +120,14 @@ public class FakeOres
 			   mob_BLACK_MAGE_ID,
 			   mob_MAGE_SPELL_ID,
 			   mob_REGEN_EGG_ID,
-			   mob_MUTANT_MONSTER_ID,
-			   mob_SWIMMER_ANIMAL_ID;
+			   mob_MUTANT_MONSTER_ID;
 	public static boolean spawn_PlayerHunter,
 				   		  spawn_Flyer,
 				   		  spawn_Schaza,
 				   		  spawn_RegenEgg,
-				   		  spawn_SwimmerAnimal,
 				   		  spawn_BlackMage,
 				   		  spawn_MutantMonster;
-	
+	public static boolean enableFakeOres;
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -164,15 +162,15 @@ public class FakeOres
 			mob_MAGE_SPELL_ID = config.get("Entity", "Mage Spell ID", 378).getInt();
 			mob_REGEN_EGG_ID = config.get("Entity", "Regeneration Egg ID", 379).getInt();
 			mob_MUTANT_MONSTER_ID = config.get("Entity", "Mutant Monster ID", 380).getInt();
-			mob_SWIMMER_ANIMAL_ID = config.get("Entity", "Swimmer Animal ID", 381).getInt();
 			
 			spawn_PlayerHunter = config.get("Spawn", "Spawn Player Hunter", true).getBoolean(true);
 			spawn_Flyer = config.get("Spawn", "Spawn Flyer", true).getBoolean(true);
 			spawn_Schaza = config.get("Spawn", "Spawn Schaza", true).getBoolean(true);
 			spawn_RegenEgg = config.get("Spawn", "Spawn Regeneration Egg", true).getBoolean(true);
-			spawn_SwimmerAnimal = config.get("Spawn", "Spawn Swimmer Animal", true).getBoolean(true);
 			spawn_BlackMage = config.get("Spawn", "Spawn Black Mage", true).getBoolean(true);
 			spawn_MutantMonster = config.get("Spawn", "Spawn Mutant Monster", true).getBoolean(true);
+			
+			enableFakeOres = config.get("Spawn", "Enable Fake Ores", true).getBoolean(true);
 			config.save();
 		} finally {
 			if(config.hasChanged())
@@ -309,7 +307,6 @@ public class FakeOres
 		EntityRegistry.registerModEntity(EntityFlyer_Shield.class, "Flyer_Shield", mob_FLYER_SHIELD_ID, this, 40, 1, true);
 		addEntity(EntitySchaza.class, "Schaza", mob_SCHAZA_ID);
 		addEntity(EntityBlackMage.class, "BlackMage", mob_BLACK_MAGE_ID);
-		addEntity(EntitySwimmerAnimal.class, "SwimmerAnimal", mob_SWIMMER_ANIMAL_ID);
 		EntityRegistry.registerModEntity(EntityMageSpell.class, "MageSpell", mob_MAGE_SPELL_ID, this, 40, 1, true);
 		addEntity(EntityRegenEgg.class, "RegenEgg", mob_REGEN_EGG_ID);
 		proxy.loadRender();

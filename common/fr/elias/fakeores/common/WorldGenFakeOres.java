@@ -14,43 +14,46 @@ public class WorldGenFakeOres implements IWorldGenerator {
 
 	public void generateSurface(World world, int x, int z, Random rand)
 	{
-		for(int i = 0; i < 2; i++)
+		if(FakeOres.enableFakeOres)
 		{
-			(new WorldGenMinable(FakeOres.fakeOreVanilla, 0, 3, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(16), z + rand.nextInt(16));
-		}
-		for(int i = 0; i < 2; i++)
-		{
-			(new WorldGenMinable(FakeOres.fakeOreVanilla, 1, 5, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(32), z + rand.nextInt(16));
-		}
-		for(int i = 0; i < 2; i++)
-		{
-			(new WorldGenMinable(FakeOres.fakeOreVanilla, 2, 4, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(32), z + rand.nextInt(16));
-		}
-		for(int i = 0; i < 20; i++)
-		{
-			(new WorldGenMinable(FakeOres.fakeOreVanilla, 3, 5, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(64), z + rand.nextInt(16));
-			(new WorldGenMinable(FakeOres.fakeOreVanilla, 4, 14, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
-		}
-		for(int i = 0; i < 2; i++)
-		{
-			(new WorldGenMinable(FakeOres.fakeOreVanilla, 5, 14, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(24), z + rand.nextInt(16));
-			(new WorldGenMinable(FakeOres.fakeOreVanilla, 7, 7, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(24), z + rand.nextInt(16));
-		}
-		if(Loader.isModLoaded("IC2"))
-		{
-			for(int i = 0; i < 20; i++)
+			for(int i = 0; i < 2; i++)
 			{
-				(new WorldGenMinable(FakeOres.fakeTin, 0, 3, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(64), z + rand.nextInt(16));
-				(new WorldGenMinable(FakeOres.fakeCopper, 0, 3, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(64), z + rand.nextInt(16));
+				(new WorldGenMinable(FakeOres.fakeOreVanilla, 0, 3, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(16), z + rand.nextInt(16));
 			}
 			for(int i = 0; i < 2; i++)
 			{
-				(new WorldGenMinable(FakeOres.fakeUranium, 0, 2, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(70), z + rand.nextInt(16));
+				(new WorldGenMinable(FakeOres.fakeOreVanilla, 1, 5, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(32), z + rand.nextInt(16));
 			}
-		}
-		for(int i = 0; i < 2; i++)
-		{
-			(new WorldGenMinable(FakeOres.antiOreStone, 0, 6, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
+			for(int i = 0; i < 2; i++)
+			{
+				(new WorldGenMinable(FakeOres.fakeOreVanilla, 2, 4, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(32), z + rand.nextInt(16));
+			}
+			for(int i = 0; i < 20; i++)
+			{
+				(new WorldGenMinable(FakeOres.fakeOreVanilla, 3, 5, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(64), z + rand.nextInt(16));
+				(new WorldGenMinable(FakeOres.fakeOreVanilla, 4, 14, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
+			}
+			for(int i = 0; i < 2; i++)
+			{
+				(new WorldGenMinable(FakeOres.fakeOreVanilla, 5, 14, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(24), z + rand.nextInt(16));
+				(new WorldGenMinable(FakeOres.fakeOreVanilla, 7, 7, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(24), z + rand.nextInt(16));
+			}
+			if(Loader.isModLoaded("IC2"))
+			{
+				for(int i = 0; i < 20; i++)
+				{
+					(new WorldGenMinable(FakeOres.fakeTin, 0, 3, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(64), z + rand.nextInt(16));
+					(new WorldGenMinable(FakeOres.fakeCopper, 0, 3, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(64), z + rand.nextInt(16));
+				}
+				for(int i = 0; i < 2; i++)
+				{
+					(new WorldGenMinable(FakeOres.fakeUranium, 0, 2, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(70), z + rand.nextInt(16));
+				}
+			}
+			for(int i = 0; i < 2; i++)
+			{
+				(new WorldGenMinable(FakeOres.antiOreStone, 0, 6, Blocks.stone)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(128), z + rand.nextInt(16));
+			}
 		}
 	}
 	public void generateCustom(World world, int x, int z, Random rand)
@@ -68,9 +71,12 @@ public class WorldGenFakeOres implements IWorldGenerator {
 	}
 	public void generateNether(World world, int x, int z, Random rand)
 	{
-		for(int i = 0; i < 16; i++)
+		if(FakeOres.enableFakeOres)
 		{
-			(new WorldGenMinable(FakeOres.fakeOreVanilla, 6, 13, Blocks.netherrack)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(108) + 10, z + rand.nextInt(16));
+			for(int i = 0; i < 16; i++)
+			{
+				(new WorldGenMinable(FakeOres.fakeOreVanilla, 6, 13, Blocks.netherrack)).generate(world, rand, x + rand.nextInt(16), rand.nextInt(108) + 10, z + rand.nextInt(16));
+			}
 		}
 	}
 	

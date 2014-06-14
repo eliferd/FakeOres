@@ -131,6 +131,7 @@ public class EntitySchaza extends EntityDimensionMob
             return;
         }
 	}
+	
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();

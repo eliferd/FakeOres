@@ -1,12 +1,17 @@
 package fr.elias.fakeores.client;
 
-import fr.elias.fakeores.common.EntityOres;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import fr.elias.fakeores.common.EntityOres;
 
 public class RenderOre extends RenderLiving {
 
@@ -22,7 +27,6 @@ public class RenderOre extends RenderLiving {
 	public static final ResourceLocation tin = new ResourceLocation("fakeores:textures/entity/tinOre.png");
 	public static final ResourceLocation uranium = new ResourceLocation("fakeores:textures/entity/uraniumOre.png");
 	public static final ResourceLocation noTexture = new ResourceLocation("fakeores:textures/entity/Ore.png");
-	
 	public RenderOre(ModelBase par1ModelBase) {
 		super(par1ModelBase, 0F);
 	}
@@ -31,6 +35,14 @@ public class RenderOre extends RenderLiving {
     {
         return 0.0F;
     }
+	public void renderHurted(EntityOres mob, double x, double y, double z, float par8, float par9)
+	{
+		if(mob.hurtTime > 0 || mob.deathTime > 0) // is hurted by another entity
+		{
+			GL11.glColor4f(0.0F, 1F, 0.0F, 1F);
+		}
+		super.doRender((EntityLiving)mob, x, y, z, par8, par9);
+	}
     protected float getDeathMaxRotation(EntityLivingBase par1EntityLivingBase)
     {
         return this.setSpiderDeathMaxRotation((EntityOres)par1EntityLivingBase);
@@ -45,5 +57,8 @@ public class RenderOre extends RenderLiving {
 	{
 		return bindTexture((EntityOres)entity);
 	}
-
+    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    {
+        this.renderHurted((EntityOres)par1EntityLiving, par2, par4, par6, par8, par9);
+    }
 }

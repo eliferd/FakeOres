@@ -75,6 +75,7 @@ public class EntityOres extends EntityMob {
 		deadByAntiOreStone(worldObj, x - 1, y, z);
 		deadByAntiOreStone(worldObj, x, y - 1, z);
 		deadByAntiOreStone(worldObj, x, y, z - 1);
+		this.fallDistance = 0F;
 		super.onLivingUpdate();
 	}
     public void deadByAntiOreStone(World world, int x, int y, int z)

@@ -11,7 +11,6 @@ import fr.elias.fakeores.common.EntityFlyer;
 import fr.elias.fakeores.common.EntityPlayerHunter;
 import fr.elias.fakeores.common.EntityRegenEgg;
 import fr.elias.fakeores.common.EntitySchaza;
-import fr.elias.fakeores.common.EntitySwimmerAnimal;
 import fr.elias.fakeores.common.FakeOres;
 
 public class BiomeGenOreDimension extends BiomeGenBase
@@ -39,10 +38,6 @@ public class BiomeGenOreDimension extends BiomeGenBase
 		if(FakeOres.spawn_RegenEgg)
 		{
 			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityRegenEgg.class, 5, 1, 1));
-		}
-		if(FakeOres.spawn_SwimmerAnimal)
-		{
-			this.spawnableWaterCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySwimmerAnimal.class, 12, 8, 16));
 		}
 		this.topBlock = FakeOres.fd_grass;
 		this.fillerBlock = FakeOres.fd_dirt;

@@ -1,8 +1,12 @@
 package fr.elias.fakeores.common;
 
+import java.util.List;
+
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
@@ -53,7 +57,6 @@ public class EntityPlayerHunter extends EntityDimensionMob
             rotationPitch = 90F;
         }
     }
-
     public boolean attackEntityFrom(DamageSource damagesource, float f)
     {
         Entity entity = damagesource.getEntity();
