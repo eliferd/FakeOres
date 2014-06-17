@@ -20,7 +20,7 @@ entity.Schaza.name=Schaza
 entity.SwimmerAnimal.name=Swimming Animal
 entity.MutantMonster.name=Mutant Monster
 entity.BlackMage.name=Black Mage
-entity.MageSpell.name=Mage Spell (Black Mage)
+entity.MageSpell.name=Mage Spell
 
 #items
 item.antiOresBlade.name=Anti Ores Blade

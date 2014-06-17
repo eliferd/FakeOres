@@ -85,7 +85,7 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
             double d0 = entity.posX - this.posX;
             double d1 = entity.boundingBox.minY + (double)(entity.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
             double d2 = entity.posZ - this.posZ;
-            if(rand.nextInt(18) == 0)
+            if(rand.nextInt(24) == 0)
             {
                 float f1 = MathHelper.sqrt_float(f) * 0.5F;
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1009, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
@@ -100,27 +100,27 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
     	}
     	if(phase == 2)
     	{
-    		if(rand.nextInt(14) == 0)
+    		if(rand.nextInt(20) == 0)
     		{
         		attackEntityWithRangedAttack((EntityLivingBase)entity, f);
     		}
-    		if(rand.nextInt(40) == 0)
+    		if(rand.nextInt(80) == 0)
     		{
     			this.spawnSomeSbires("iron", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     			this.spawnSomeSbires("coal", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     			this.spawnSomeSbires("quartz", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     		}
-    		if(rand.nextInt(80) == 0)
+    		if(rand.nextInt(160) == 0)
     		{
     			this.spawnSomeSbires("redstone", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     			this.spawnSomeSbires("lapis", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     		}
-    		if(rand.nextInt(120) == 0)
+    		if(rand.nextInt(240) == 0)
     		{
     			this.spawnSomeSbires("gold", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     			this.spawnSomeSbires("diamond", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     		}
-    		if(rand.nextInt(160) == 0)
+    		if(rand.nextInt(320) == 0)
     		{
     			this.spawnSomeSbires("all", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     		}
@@ -220,7 +220,7 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
     }
     public void onDeath(DamageSource sourceOfDamage)
     {
-    	worldObj.createExplosion(this, posX, posY + 2, posZ, 10.0F, false);
+    	worldObj.createExplosion(this, posX, posY + 2, posZ, 0.0F, false);
     	this.dropItem(FakeOres.oreBoss_Star, rand.nextInt(2) == 0 ? 2 : 1);
     }
     public int getPhase()
