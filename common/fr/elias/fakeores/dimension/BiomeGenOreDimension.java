@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import fr.elias.fakeores.common.EntityFlyer;
+import fr.elias.fakeores.common.EntityNopeGuy;
 import fr.elias.fakeores.common.EntityPlayerHunter;
 import fr.elias.fakeores.common.EntityRegenEgg;
 import fr.elias.fakeores.common.EntitySchaza;
@@ -38,6 +39,10 @@ public class BiomeGenOreDimension extends BiomeGenBase
 		if(FakeOres.spawn_RegenEgg)
 		{
 			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityRegenEgg.class, 5, 1, 1));
+		}
+		if(FakeOres.spawn_NopeGuy)
+		{
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityNopeGuy.class, 12, 1, 3));
 		}
 		this.topBlock = FakeOres.fd_grass;
 		this.fillerBlock = FakeOres.fd_dirt;

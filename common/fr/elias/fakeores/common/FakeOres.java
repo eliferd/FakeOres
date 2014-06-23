@@ -53,7 +53,8 @@ public class FakeOres
 	protected static final BiomeGenBase.Height height_fd_Biome = new BiomeGenBase.Height(0.0F, 0.5F);
 	
 	public static Item texture_CustomSmokeFX_particle,
-					   texture_BloodFX_particle;
+					   texture_BloodFX_particle,
+					   texture_NopeFX_particle;
 	
 	public static FD_BlockGrass fd_grass;
 	
@@ -89,7 +90,14 @@ public class FakeOres
 					   fd_daren_ingot,
 					   fd_purlight_ingot,
 					   fd_rainbow_ingot,
-					   fd_passcard_schaza;
+					   fd_passcard_schaza,
+						
+					   letter_n,
+					   letter_o,
+					   letter_p,
+					   letter_e,
+					   nope_word,
+					   nopeGrenade;
 
 	public static int dimID;
 	public int mainBiomeID,
@@ -120,13 +128,16 @@ public class FakeOres
 			   mob_BLACK_MAGE_ID,
 			   mob_MAGE_SPELL_ID,
 			   mob_REGEN_EGG_ID,
-			   mob_MUTANT_MONSTER_ID;
+			   mob_MUTANT_MONSTER_ID,
+			   mob_NOPE_GUY_ID,
+			   mob_NOPE_GRENADE_ID;
 	public static boolean spawn_PlayerHunter,
 				   		  spawn_Flyer,
 				   		  spawn_Schaza,
 				   		  spawn_RegenEgg,
 				   		  spawn_BlackMage,
-				   		  spawn_MutantMonster;
+				   		  spawn_MutantMonster,
+				   		  spawn_NopeGuy;
 	public static boolean enableFakeOres;
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -162,6 +173,8 @@ public class FakeOres
 			mob_MAGE_SPELL_ID = config.get("Entity", "Mage Spell ID", 378).getInt();
 			mob_REGEN_EGG_ID = config.get("Entity", "Regeneration Egg ID", 379).getInt();
 			mob_MUTANT_MONSTER_ID = config.get("Entity", "Mutant Monster ID", 380).getInt();
+			mob_NOPE_GUY_ID = config.get("Entity", "Nope Guy ID", 381).getInt();
+			mob_NOPE_GRENADE_ID = config.get("Entity", "Nope Grenade ID", 382).getInt();
 			
 			spawn_PlayerHunter = config.get("Spawn", "Spawn Player Hunter", true).getBoolean(true);
 			spawn_Flyer = config.get("Spawn", "Spawn Flyer", true).getBoolean(true);
@@ -169,6 +182,7 @@ public class FakeOres
 			spawn_RegenEgg = config.get("Spawn", "Spawn Regeneration Egg", true).getBoolean(true);
 			spawn_BlackMage = config.get("Spawn", "Spawn Black Mage", true).getBoolean(true);
 			spawn_MutantMonster = config.get("Spawn", "Spawn Mutant Monster", true).getBoolean(true);
+			spawn_NopeGuy = config.get("Spawn", "Spawn Nope Guy", true).getBoolean(true);
 			
 			enableFakeOres = config.get("Spawn", "Enable Fake Ores", true).getBoolean(true);
 			config.save();
@@ -196,6 +210,12 @@ public class FakeOres
 		fd_purlight_ingot = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("fd_purlight_ingot").setTextureName("fakeores:purlight_ingot");
 		fd_rainbow_ingot = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("fd_rainbow_ingot").setTextureName("fakeores:rainbow_ingot");
 		fd_passcard_schaza = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("fd_passcard_schaza").setTextureName("fakeores:passcard_schaza");
+		letter_n = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("letter_n").setTextureName("fakeores:n");
+		letter_o = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("letter_o").setTextureName("fakeores:o");
+		letter_p = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("letter_p").setTextureName("fakeores:p");
+		letter_e = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("letter_e").setTextureName("fakeores:e");
+		nope_word = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("nope_word").setTextureName("fakeores:nope_word");
+		nopeGrenade = new ItemNopeGrenade().setCreativeTab(fakeOresTab).setUnlocalizedName("nopeGrenade").setTextureName("fakeores:nopeGrenade");
 		/** INIT PART [BLOCKS] **/
 		fakeOreVanilla = new BlockFakeOresVanilla().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockName("fakeOre");
 		fd_grass = (FD_BlockGrass) new FD_BlockGrass("fakeores:oredimension_grass_top", "fakeores:oredimension_grass_side", this.fd_dirt, this.fd_grass).setHardness(0.6F).setStepSound(Block.soundTypeGrass).setBlockName("fd_grass");
@@ -260,6 +280,12 @@ public class FakeOres
 		GameRegistry.registerItem(fd_purlight_ingot, "fd_purlight_ingot", "fakeores");
 		GameRegistry.registerItem(fd_rainbow_ingot, "fd_rainbow_ingot", "fakeores");
 		GameRegistry.registerItem(fd_passcard_schaza, "fd_passcard_schaza", "fakeores");
+		GameRegistry.registerItem(letter_n, "letter_n", "fakeores");
+		GameRegistry.registerItem(letter_o, "letter_o", "fakeores");
+		GameRegistry.registerItem(letter_p, "letter_p", "fakeores");
+		GameRegistry.registerItem(letter_e, "letter_e", "fakeores");
+		GameRegistry.registerItem(nope_word, "nope_word", "fakeores");
+		GameRegistry.registerItem(nopeGrenade, "nopeGrenade", "fakeores");
 		
 		/** DIMENSION PART **/
 		mainODBiome = new BiomeGenOreDimension(mainBiomeID).setBiomeName("FakeOresBiome").setHeight(height_fd_Biome).setDisableRain();
@@ -278,8 +304,10 @@ public class FakeOres
 		/** PARTICLE PART **/
 		texture_CustomSmokeFX_particle = new ItemParticleTexture().setUnlocalizedName("texture_CustomSmokeFX_particle").setTextureName("fakeores:customsmoke");
 		texture_BloodFX_particle = new ItemParticleTexture().setUnlocalizedName("texture_BloodFX_particle").setTextureName("fakeores:bloodfx");
+		texture_NopeFX_particle = new ItemParticleTexture().setUnlocalizedName("texture_NopeFX_particle").setTextureName("fakeores:nope");
 		GameRegistry.registerItem(texture_CustomSmokeFX_particle, "texture_CustomSmokeFX_particle");
 		GameRegistry.registerItem(texture_BloodFX_particle, "texture_BloodFX_particle");
+		GameRegistry.registerItem(texture_NopeFX_particle, "texture_NopeFX_particle");
 	}
 
 	@EventHandler
@@ -294,6 +322,7 @@ public class FakeOres
 		addEntity(EntityNetherQuartzOre.class, "NetherQuartzOre", mob_quartzOreID);
 		addEntity(EntityLapisLazuliOre.class, "LapisLazuliOre", mob_lapisOreID);
 		addEntity(EntityMutantMonster.class, "MutantMonster", mob_MUTANT_MONSTER_ID);
+		addEntity(EntityNopeGuy.class, "NopeGuy", mob_NOPE_GUY_ID);
 		if(Loader.isModLoaded("IC2"))
 		{
 			addEntity(EntityCopperOre.class, "CopperOre", mob_copperOreID);
@@ -309,6 +338,7 @@ public class FakeOres
 		addEntity(EntityBlackMage.class, "BlackMage", mob_BLACK_MAGE_ID);
 		EntityRegistry.registerModEntity(EntityMageSpell.class, "MageSpell", mob_MAGE_SPELL_ID, this, 40, 1, true);
 		addEntity(EntityRegenEgg.class, "RegenEgg", mob_REGEN_EGG_ID);
+		EntityRegistry.registerModEntity(EntityNopeGrenade.class, "NopeGrenade", mob_NOPE_GRENADE_ID, this, 40, 1, true);
 		proxy.loadRender();
 		GameRegistry.addRecipe(new ItemStack(this.antiOresBlade, 1), new Object[] {"X", "X", "B", 'X', this.antiOreStone, 'B', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(this.fragment_boss, 1), new Object[] {"XSB", "SFS", "CSD", 'X', this.fragment_part1, 'B', this.fragment_part2, 'F', Blocks.iron_block, 'C', this.fragment_part4, 'D', this.fragment_part3, 'S', Items.gold_ingot});
@@ -327,6 +357,8 @@ public class FakeOres
 		GameRegistry.addRecipe(new ItemStack(this.fd_purlight_ingot, 9), new Object[] {"X", 'X', this.fd_purlight_block});
 		GameRegistry.addRecipe(new ItemStack(this.fd_rainbow_ingot, 9), new Object[] {"X", 'X', this.fd_rainbow_block});
 		GameRegistry.addRecipe(new ItemStack(this.fd_passcard_schaza, 1), new Object[] {"XXX", "XSX", "XXX", 'X', Items.paper, 'S', new ItemStack(Items.dye, 1, 0)});
+		GameRegistry.addShapelessRecipe(new ItemStack(this.nope_word, 1), new Object[] {this.letter_n, this.letter_o, this.letter_p, this.letter_e});
+		GameRegistry.addRecipe(new ItemStack(this.nopeGrenade, 1), new Object[] {"RXR", "XBX", "RXR", 'X', Blocks.tnt, 'B', this.nope_word, 'R', this.fd_rainbow_ingot});
 	}
 
 	public void addEntity(Class<? extends Entity> entityClass, String entityName, int id)

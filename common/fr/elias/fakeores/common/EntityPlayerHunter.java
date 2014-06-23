@@ -29,7 +29,16 @@ public class EntityPlayerHunter extends EntityDimensionMob
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(4.9D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.0D);
     }
-    
+	protected String getHurtSound()
+	{
+		return "fakeores:mob.playerhunter.hurt";
+	}
+
+	@Override
+	protected String getDeathSound()
+	{
+		return "fakeores:mob.playerhunter.hurt";
+	}
     protected void attackEntity(Entity target, float burnInToTheGround)
     {
         if (this.attackTime <= 0 && burnInToTheGround < 2.0F && target.boundingBox.maxY > this.boundingBox.minY && target.boundingBox.minY < this.boundingBox.maxY)

@@ -1,13 +1,17 @@
 package fr.elias.fakeores.common;
 
+import java.util.List;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityFlyer_Shield extends EntityCreature {
 
 	public int lifespan;
-	
 	public EntityFlyer_Shield(World par1World) 
 	{
 		super(par1World);
@@ -22,6 +26,20 @@ public class EntityFlyer_Shield extends EntityCreature {
 		{
 			setDead();
 		}
+	}
+	public void updateEntityActionState()
+	{
+		List list = worldObj.getEntitiesWithinAABB(EntityFlyer.class, AxisAlignedBB.getAABBPool().getAABB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(8D, 4D, 8D));
+		for(int i = 0; i< list.size(); i++)
+		{
+			Entity entity = (Entity)list.get(i);
+			EntityFlyer flyer = (EntityFlyer) entity;
+			if(flyer.getHealth() < 0.5F)
+			{
+				this.setDead();
+			}
+		}
+		super.updateEntityActionState();
 	}
 	public void onDeath(DamageSource damagesource)
 	{

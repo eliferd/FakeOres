@@ -29,6 +29,7 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
 		super(par1World);
 		phase = 1;
         this.isImmuneToFire = true;
+        this.experienceValue = 4750;
         setSize(3F, 5F);
 	}
     protected void applyEntityAttributes()
@@ -100,11 +101,11 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
     	}
     	if(phase == 2)
     	{
-    		if(rand.nextInt(20) == 0)
+    		if(rand.nextInt(50) == 0)
     		{
         		attackEntityWithRangedAttack((EntityLivingBase)entity, f);
     		}
-    		if(rand.nextInt(80) == 0)
+    		if(rand.nextInt(100) == 0)
     		{
     			this.spawnSomeSbires("iron", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     			this.spawnSomeSbires("coal", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
@@ -248,6 +249,10 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
         	if(entity instanceof EntityLargeFireball)
         	{
         		f = 75f;
+        	}
+        	if(this.phase == 2)
+        	{
+        		f = 50f;
         	}
     	}
     	return super.attackEntityFrom(damagesource, f);

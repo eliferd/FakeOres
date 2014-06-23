@@ -21,6 +21,8 @@ import fr.elias.fakeores.common.EntityLapisLazuliOre;
 import fr.elias.fakeores.common.EntityMageSpell;
 import fr.elias.fakeores.common.EntityMutantMonster;
 import fr.elias.fakeores.common.EntityNetherQuartzOre;
+import fr.elias.fakeores.common.EntityNopeGrenade;
+import fr.elias.fakeores.common.EntityNopeGuy;
 import fr.elias.fakeores.common.EntityOresBoss;
 import fr.elias.fakeores.common.EntityPlayerHunter;
 import fr.elias.fakeores.common.EntityRedstoneOre;
@@ -53,7 +55,8 @@ public class ClientProxy extends StaticProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMageSpell.class, new RenderMageSpell());
 		RenderingRegistry.registerEntityRenderingHandler(EntityRegenEgg.class, new RenderRegenEgg());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMutantMonster.class, new RenderMutantMonster());
-		
+		RenderingRegistry.registerEntityRenderingHandler(EntityNopeGuy.class, new RenderNopeGuy());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNopeGrenade.class, new RenderNopeGrenade(FakeOres.nopeGrenade));
 		MinecraftForgeClient.registerItemRenderer(FakeOres.antiOresBlade, new ItemAntiOresBladeModelRenderer());
 		MinecraftForgeClient.registerItemRenderer(FakeOres.fakeOres_finder, new ItemFakeOresFinderRenderer());
 		if(Loader.isModLoaded("IC2"))
@@ -72,6 +75,9 @@ public class ClientProxy extends StaticProxy {
 		}else if(name == "blood")
 		{
 			fx = new EntityBloodFX(world, x, y, z, 1F, FakeOres.texture_BloodFX_particle.getIconFromDamage(0));
+		}else if(name == "nope")
+		{
+			fx = new EntityNopeFX(world, x, y, z, 0.0D, 0.0D, 0.0D, 1F, FakeOres.texture_NopeFX_particle.getIconFromDamage(0), world.rand.nextInt(1) == 0? 2F : 0, world.rand.nextInt(1) == 0? 2F : 0F,world.rand.nextInt(1) == 0? 2F : 0F);
 		}
 		Minecraft.getMinecraft().effectRenderer.addEffect(fx);
 	}

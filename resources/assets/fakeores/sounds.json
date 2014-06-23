@@ -1,0 +1,35 @@
+{
+  "mob.mmonster.dead": {
+    "category": "hostile",
+    "sounds": [
+      "mob/mmonster/dead1",
+	  "mob/mmonster/dead2"
+    ]
+  },
+  "mob.mmonster.hurt": {
+    "category": "hostile",
+    "sounds": [
+      "mob/mmonster/hurt1",
+      "mob/mmonster/hurt2",
+      "mob/mmonster/hurt3"
+    ]
+  },
+    "mob.playerhunter.hurt": {
+    "category": "hostile",
+    "sounds": [
+      "mob/playerhunter/hurt"
+    ]
+  },
+    "mob.nopeguy.hurt": {
+    "category": "hostile",
+    "sounds": [
+      "mob/nopeguy/hurt"
+    ]
+  },
+	"mob.nopeguy.dead": {
+    "category": "hostile",
+    "sounds": [
+      "mob/nopeguy/dead"
+    ]
+  }
+}

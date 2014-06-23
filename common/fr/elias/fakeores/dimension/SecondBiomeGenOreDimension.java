@@ -2,11 +2,8 @@ package fr.elias.fakeores.dimension;
 
 import net.minecraft.world.biome.BiomeGenBase;
 import fr.elias.fakeores.common.EntityBlackMage;
-import fr.elias.fakeores.common.EntityFlyer;
 import fr.elias.fakeores.common.EntityMutantMonster;
-import fr.elias.fakeores.common.EntityPlayerHunter;
-import fr.elias.fakeores.common.EntityRegenEgg;
-import fr.elias.fakeores.common.EntitySchaza;
+import fr.elias.fakeores.common.EntityNopeGuy;
 import fr.elias.fakeores.common.FakeOres;
 
 public class SecondBiomeGenOreDimension extends BiomeGenOreDimension 
@@ -18,11 +15,17 @@ public class SecondBiomeGenOreDimension extends BiomeGenOreDimension
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableCaveCreatureList.clear();
-		if(FakeOres.spawn_BlackMage){
+		if(FakeOres.spawn_BlackMage)
+		{
 			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityBlackMage.class, 6, 1, 1));
 		}
-		if(FakeOres.spawn_MutantMonster){
+		if(FakeOres.spawn_MutantMonster)
+		{
 			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityMutantMonster.class, 12, 1, 3));
+		}
+		if(FakeOres.spawn_NopeGuy)
+		{
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityNopeGuy.class, 12, 1, 3));
 		}
 		this.topBlock = FakeOres.fd_second_grass;
 		this.fillerBlock = FakeOres.fd_dirt;

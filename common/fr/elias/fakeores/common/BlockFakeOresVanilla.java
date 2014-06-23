@@ -61,9 +61,9 @@ public class BlockFakeOresVanilla extends Block
 
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metadata)
 	{
-		if(FMLCommonHandler.instance().getEffectiveSide().isClient() && world.difficultySetting == EnumDifficulty.PEACEFUL)
+		if(FMLCommonHandler.instance().getEffectiveSide().isClient() && world.rand.nextInt(20) == 0)
 		{
-			FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText("Your Minecraft is in peaceful mode. All fake ores are now disabled. Please change your difficulty setting."));
+			FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText("If your Minecraft is in peaceful mode, All fake ores is disabled. Just change your difficulty setting."));
 		}
 		if(!world.isRemote)
 		{

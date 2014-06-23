@@ -40,7 +40,7 @@ public class EntityDimensionMob extends EntityCreature
     }
     public void onUpdate()
     {
-        if(getHealth() < 7.5F && worldObj.isRemote)
+        if(getHealth() < 8.5F && worldObj.isRemote)
         {
         	blood();
         }

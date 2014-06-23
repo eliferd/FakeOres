@@ -11,6 +11,17 @@ public class EntityMutantMonster extends EntityDimensionMob
 		isHostile = true;
 		setSize(1.5F, 2.5F);
 	}
+	@Override
+	protected String getHurtSound()
+	{
+		return "fakeores:mob.mmonster.hurt";
+	}
+
+	@Override
+	protected String getDeathSound()
+	{
+		return "fakeores:mob.mmonster.dead";
+	}
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();

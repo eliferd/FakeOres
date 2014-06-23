@@ -21,6 +21,9 @@ entity.SwimmerAnimal.name=Swimming Animal
 entity.MutantMonster.name=Mutant Monster
 entity.BlackMage.name=Black Mage
 entity.MageSpell.name=Mage Spell
+entity.NopeGuy.name=Nope Guy
+entity.RegenEgg.name=Regeneration Egg
+entity.NopeGrenade.name=Nope Grenade
 
 #items
 item.antiOresBlade.name=Anti Ores Blade
@@ -36,6 +39,12 @@ item.fd_daren_ingot.name=Daren Ingot
 item.fd_purlight_ingot.name=Purlight Ingot
 item.fd_rainbow_ingot.name=Rainbow Ingot
 item.fd_passcard_schaza.name=Pass Card (Needed to mount Schaza)
+item.letter_n.name=Letter N (NOPE word part)
+item.letter_o.name=Letter O (NOPE word part)
+item.letter_p.name=Letter P (NOPE word part)
+item.letter_e.name=Letter E (NOPE word part)
+item.nope_word.name=Nope Word
+item.nopeGrenade.name=Nope Grenade
 
 #blocks
 tile.fakeDiamondOre.name=Fake Ore
