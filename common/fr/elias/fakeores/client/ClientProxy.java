@@ -11,6 +11,7 @@ import fr.elias.fakeores.common.EntityBlackMage;
 import fr.elias.fakeores.common.EntityBossTeleporter;
 import fr.elias.fakeores.common.EntityCoalOre;
 import fr.elias.fakeores.common.EntityCopperOre;
+import fr.elias.fakeores.common.EntityDangerousPlant;
 import fr.elias.fakeores.common.EntityDiamondOre;
 import fr.elias.fakeores.common.EntityEmeraldOre;
 import fr.elias.fakeores.common.EntityFlyer;
@@ -56,6 +57,7 @@ public class ClientProxy extends StaticProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityRegenEgg.class, new RenderRegenEgg());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMutantMonster.class, new RenderMutantMonster());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNopeGuy.class, new RenderNopeGuy());
+		RenderingRegistry.registerEntityRenderingHandler(EntityDangerousPlant.class, new RenderDangerousPlant());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNopeGrenade.class, new RenderNopeGrenade(FakeOres.nopeGrenade));
 		MinecraftForgeClient.registerItemRenderer(FakeOres.antiOresBlade, new ItemAntiOresBladeModelRenderer());
 		MinecraftForgeClient.registerItemRenderer(FakeOres.fakeOres_finder, new ItemFakeOresFinderRenderer());

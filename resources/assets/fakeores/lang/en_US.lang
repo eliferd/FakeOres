@@ -45,6 +45,11 @@ item.letter_p.name=Letter P (NOPE word part)
 item.letter_e.name=Letter E (NOPE word part)
 item.nope_word.name=Nope Word
 item.nopeGrenade.name=Nope Grenade
+item.fd_stone_axe.name=Fake Dimension Cobblestone Axe
+item.fd_stone_pickaxe.name=Fake Dimension Cobblestone Pickaxe
+item.fd_stone_sword.name=Fake Dimension Cobblestone Sword
+item.fd_stone_hoe.name=Fake Dimension Cobblestone Hoe
+item.fd_stone_spade.name=Fake Dimension Cobblestone Spade
 
 #blocks
 tile.fakeDiamondOre.name=Fake Ore

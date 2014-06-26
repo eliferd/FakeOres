@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import fr.elias.fakeores.common.EntityDangerousPlant;
 import fr.elias.fakeores.common.EntityFlyer;
 import fr.elias.fakeores.common.EntityNopeGuy;
 import fr.elias.fakeores.common.EntityPlayerHunter;
@@ -43,6 +44,10 @@ public class BiomeGenOreDimension extends BiomeGenBase
 		if(FakeOres.spawn_NopeGuy)
 		{
 			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityNopeGuy.class, 12, 1, 3));
+		}
+		if(FakeOres.spawn_DangerousPlant)
+		{
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityDangerousPlant.class, 5, 1, 1));
 		}
 		this.topBlock = FakeOres.fd_grass;
 		this.fillerBlock = FakeOres.fd_dirt;

@@ -101,7 +101,7 @@ public class EntityNopeGrenade extends EntityItem
         	Entity entity = (Entity)list.get(i);
         	if(!list.isEmpty()) 
         	{
-        		if(!(entity instanceof EntityPlayer))
+        		if(!(entity instanceof EntityPlayer) && !(entity instanceof EntityDangerousPlant) && !(entity instanceof EntityRegenEgg))
         		{
         			entity.mountEntity(this);
         			entity.setPosition(posX, posY, posZ);
@@ -109,6 +109,7 @@ public class EntityNopeGrenade extends EntityItem
         			entity.rotationPitch = getRandom(0, 180);
         		}
         	}
+        	worldObj.spawnParticle("largesmoke", posX + rand.nextInt(2), posY + rand.nextInt(2), posZ + rand.nextInt(2), 0.0D, 0.0D, 0.0D);
         }
         if (motionX == 0.0D && d != 0.0D)
         {

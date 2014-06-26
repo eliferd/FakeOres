@@ -1,6 +1,7 @@
 package fr.elias.fakeores.common;
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,9 +12,8 @@ import net.minecraft.world.World;
 
 public class EntitySchaza extends EntityDimensionMob 
 {
-	public double floatcycle;
+	//public double floatcycle;
 	public int floatdir;
-	public double floatmaxcycle;
 	public int blastoff;
 	public int blastofftimer;
 	
@@ -23,8 +23,6 @@ public class EntitySchaza extends EntityDimensionMob
 		isHostile = false;
 		setSize(1.5F, 1.5F);
         floatdir = 1;
-        floatcycle = 0.0D;
-        floatmaxcycle = 0.10499999672174454D;
         blastoff = rand.nextInt(500) + 400;
 	}
 	public void onUpdate()
@@ -33,7 +31,6 @@ public class EntitySchaza extends EntityDimensionMob
         {
             posY += 2.5D;
             floatdir = 1;
-            floatcycle = 0.0D;
         }
 
         fallDistance = -100F;
@@ -60,23 +57,13 @@ public class EntitySchaza extends EntityDimensionMob
 
         if (floatdir > 0)
         {
-            floatcycle += 0.017999999225139618D;
-
-            if (floatcycle > floatmaxcycle)
-            {
-                floatdir = floatdir * -1;
-                fallDistance += -1.5F;
-            }
+        	floatdir = floatdir * -1;
+        	fallDistance += -1.5F;
         }
         else
         {
-            floatcycle -= 0.0094999996945261955D;
-
-            if (floatcycle < -floatmaxcycle)
-            {
-                floatdir = floatdir * -1;
-                fallDistance += -1.5F;
-            }
+        	floatdir = floatdir * -1;
+        	fallDistance += -1.5F;
         }
         if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer))
         {
@@ -102,7 +89,10 @@ public class EntitySchaza extends EntityDimensionMob
             stepHeight = 920F;
             EntityPlayer entityplayer = (EntityPlayer)riddenByEntity;
             float f = 1.0F;
-
+            if(this.isInsideOfMaterial(Material.water)) // fixed dismount on collide water
+            {
+            	motionY += 1D; 
+            }
             moveStrafing = (entityplayer.moveStrafing / f) * 2.75F;
             moveForward = (entityplayer.moveForward / f) * 2.75F;
             if (moveStrafing == 0.0F && moveForward == 0.0F)
@@ -136,8 +126,7 @@ public class EntitySchaza extends EntityDimensionMob
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(10D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(2D);
     }
     public boolean interact(EntityPlayer player)
     {
@@ -148,10 +137,10 @@ public class EntitySchaza extends EntityDimensionMob
         {
     		if (player.riddenByEntity == null)
     		{
-                    if(!worldObj.isRemote)
-                    {
-                    	player.mountEntity(this);
-                    }
+    			if(!worldObj.isRemote)
+    			{
+    				player.mountEntity(this);
+    			}
             }
             blastoff += rand.nextInt(500) + 200;
         }else if(riddenByEntity != null)
@@ -164,12 +153,13 @@ public class EntitySchaza extends EntityDimensionMob
     {
         if (this.riddenByEntity != null)
         {
-            par1 = ((EntityLivingBase)this.riddenByEntity).moveStrafing * 0.7F;
+            par1 = ((EntityLivingBase)this.riddenByEntity).moveStrafing * 1.7F;
             par2 = ((EntityLivingBase)this.riddenByEntity).moveForward;
-            this.jumpMovementFactor = this.getAIMoveSpeed() * 0.1F;
+            float groundMovementFactor = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, this, "landMovementFactor", "field_70746_aG");
             if (!this.worldObj.isRemote)
             {
-                this.setAIMoveSpeed((float)this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+                this.jumpMovementFactor = 0.5F;
+                groundMovementFactor = (float)this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue();
                 super.moveEntityWithHeading(par1, par2);
             }
         }
@@ -182,9 +172,14 @@ public class EntitySchaza extends EntityDimensionMob
     }
     public void updateRiderPosition()
     {
+    	super.updateRiderPosition();
         if (riddenByEntity instanceof EntityPlayer)
         {
-        	riddenByEntity.setPosition(posX, posY + 1.8D - floatcycle, posZ);
+        	riddenByEntity.setPosition(posX, posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset() - 0.5D, posZ);
+        }
+        if (this.riddenByEntity instanceof EntityLivingBase)
+        {
+            ((EntityLivingBase)this.riddenByEntity).renderYawOffset = this.renderYawOffset;
         }
     }
     public int getMaxSpawnedInChunk()
