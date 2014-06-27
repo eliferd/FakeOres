@@ -391,7 +391,7 @@ public class FakeOres
 
 	public void addEntity(Class<? extends Entity> entityClass, String entityName, int id)
 	{
-		EntityRegistry.registerGlobalEntityID(entityClass, entityName, EntityRegistry.findGlobalUniqueEntityId(),0,0);
+		EntityRegistry.registerGlobalEntityID(entityClass, entityName, EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
 		EntityRegistry.registerModEntity(entityClass, entityName, id, this, 40, 1, true);
 	}
 }

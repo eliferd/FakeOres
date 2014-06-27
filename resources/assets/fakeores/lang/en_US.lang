@@ -24,6 +24,7 @@ entity.MageSpell.name=Mage Spell
 entity.NopeGuy.name=Nope Guy
 entity.RegenEgg.name=Regeneration Egg
 entity.NopeGrenade.name=Nope Grenade
+entity.DangerousPlant.name=Dangerous Plant
 
 #items
 item.antiOresBlade.name=Anti Ores Blade
