@@ -50,6 +50,7 @@ public class EntityMageSpell extends EntityCreature
             this.moveEntity(d1, d2, d3);
             if(onGround)
             {
+            	setDead();
             	moveEntity(d1, d2, d3);
             }
         }

@@ -20,6 +20,14 @@ public class EntityDangerousPlant extends EntityCreature
 		isPoisonous = rand.nextInt(10) == 0 ? true : false;
 		setSize(0.8F, 0.2F);
 	}
+	public void onLivingUpdate()
+	{
+		if(worldObj.getBlock((int)posX, (int)posY - 1, (int)posZ) == Blocks.air && !onGround)
+		{
+			this.posY--;
+		}
+		super.onLivingUpdate();
+	}
 	public void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -45,6 +53,14 @@ public class EntityDangerousPlant extends EntityCreature
 	{
 		return true;
 	}
+	public boolean canBePushed()
+	{
+		return false;
+	}
+    public boolean canBeCollidedWith()
+    {
+        return false;
+    }
 	public boolean isMovementBlocked()
 	{
 		return true;

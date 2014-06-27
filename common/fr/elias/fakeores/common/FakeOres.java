@@ -13,6 +13,7 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
@@ -384,6 +385,8 @@ public class FakeOres
 		GameRegistry.addRecipe(new ItemStack(this.fd_passcard_schaza, 1), new Object[] {"XXX", "XSX", "XXX", 'X', Items.paper, 'S', new ItemStack(Items.dye, 1, 0)});
 		GameRegistry.addShapelessRecipe(new ItemStack(this.nope_word, 1), new Object[] {this.letter_n, this.letter_o, this.letter_p, this.letter_e});
 		GameRegistry.addRecipe(new ItemStack(this.nopeGrenade, 1), new Object[] {"RXR", "XBX", "RXR", 'X', Blocks.tnt, 'B', this.nope_word, 'R', this.fd_rainbow_ingot});
+		(new FakeOres_RecipeTools()).addRecipes(CraftingManager.getInstance());
+		(new FakeOres_RecipeWeapons()).addRecipes(CraftingManager.getInstance());
 	}
 
 	public void addEntity(Class<? extends Entity> entityClass, String entityName, int id)
