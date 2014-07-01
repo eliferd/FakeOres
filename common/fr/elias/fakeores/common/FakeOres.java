@@ -142,7 +142,8 @@ public class FakeOres
 			   mob_MUTANT_MONSTER_ID,
 			   mob_NOPE_GUY_ID,
 			   mob_NOPE_GRENADE_ID,
-			   mob_DANGEROUS_PLANT_ID;
+			   mob_DANGEROUS_PLANT_ID,
+			   mob_STALKER_ID;
 	public static boolean spawn_PlayerHunter,
 				   		  spawn_Flyer,
 				   		  spawn_Schaza,
@@ -150,7 +151,8 @@ public class FakeOres
 				   		  spawn_BlackMage,
 				   		  spawn_MutantMonster,
 				   		  spawn_NopeGuy,
-				   		  spawn_DangerousPlant;
+				   		  spawn_DangerousPlant,
+				   		  spawn_Stalker;
 	public static boolean enableFakeOres;
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -189,6 +191,7 @@ public class FakeOres
 			mob_NOPE_GUY_ID = config.get("Entity", "Nope Guy ID", 381).getInt();
 			mob_NOPE_GRENADE_ID = config.get("Entity", "Nope Grenade ID", 382).getInt();
 			mob_DANGEROUS_PLANT_ID = config.get("Entity", "Dangerous Plant ID", 383).getInt();
+			mob_STALKER_ID = config.get("Entity", "Stalker ID", 384).getInt();
 			
 			spawn_PlayerHunter = config.get("Spawn", "Spawn Player Hunter", true).getBoolean(true);
 			spawn_Flyer = config.get("Spawn", "Spawn Flyer", true).getBoolean(true);
@@ -198,7 +201,10 @@ public class FakeOres
 			spawn_MutantMonster = config.get("Spawn", "Spawn Mutant Monster", true).getBoolean(true);
 			spawn_NopeGuy = config.get("Spawn", "Spawn Nope Guy", true).getBoolean(true);
 			spawn_DangerousPlant = config.get("Spawn", "Spawn Dangerous Plant", true).getBoolean(true);
+			spawn_Stalker = config.get("Spawn", "Spawn Stalker", true).getBoolean(true);
+			
 			enableFakeOres = config.get("Spawn", "Enable Fake Ores", true).getBoolean(true);
+			
 			config.save();
 		} finally {
 			if(config.hasChanged())
@@ -365,6 +371,7 @@ public class FakeOres
 		addEntity(EntityRegenEgg.class, "RegenEgg", mob_REGEN_EGG_ID);
 		addEntity(EntityDangerousPlant.class, "DangerousPlant", mob_DANGEROUS_PLANT_ID);
 		EntityRegistry.registerModEntity(EntityNopeGrenade.class, "NopeGrenade", mob_NOPE_GRENADE_ID, this, 40, 1, true);
+		addEntity(EntityStalker.class, "Stalker", mob_STALKER_ID);
 		proxy.loadRender();
 		GameRegistry.addRecipe(new ItemStack(this.antiOresBlade, 1), new Object[] {"X", "X", "B", 'X', this.antiOreStone, 'B', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(this.fragment_boss, 1), new Object[] {"XSB", "SFS", "CSD", 'X', this.fragment_part1, 'B', this.fragment_part2, 'F', Blocks.iron_block, 'C', this.fragment_part4, 'D', this.fragment_part3, 'S', Items.gold_ingot});

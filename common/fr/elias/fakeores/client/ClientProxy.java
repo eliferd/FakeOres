@@ -1,6 +1,7 @@
 package fr.elias.fakeores.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.world.World;
@@ -29,6 +30,7 @@ import fr.elias.fakeores.common.EntityPlayerHunter;
 import fr.elias.fakeores.common.EntityRedstoneOre;
 import fr.elias.fakeores.common.EntityRegenEgg;
 import fr.elias.fakeores.common.EntitySchaza;
+import fr.elias.fakeores.common.EntityStalker;
 import fr.elias.fakeores.common.EntityTinOre;
 import fr.elias.fakeores.common.EntityUraniumOre;
 import fr.elias.fakeores.common.FakeOres;
@@ -67,6 +69,7 @@ public class ClientProxy extends StaticProxy {
 			RenderingRegistry.registerEntityRenderingHandler(EntityTinOre.class, new RenderOre(new ModelOre()));
 			RenderingRegistry.registerEntityRenderingHandler(EntityUraniumOre.class, new RenderOre(new ModelOre()));
 		}
+		RenderingRegistry.registerEntityRenderingHandler(EntityStalker.class, new RenderStalker(new ModelBiped(), 0.5F));
 	}
 	public void spawnParticle(World world, String name, double x, double y, double z)
 	{

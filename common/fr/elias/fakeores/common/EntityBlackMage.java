@@ -2,7 +2,9 @@ package fr.elias.fakeores.common;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -12,6 +14,7 @@ public class EntityBlackMage extends EntityDimensionMob
 	{
 		super(par1World);
 		isHostile = true;
+		attackTime = 120;
 	}
     protected void applyEntityAttributes()
     {
@@ -45,11 +48,10 @@ public class EntityBlackMage extends EntityDimensionMob
             {
                 this.worldObj.spawnEntityInWorld(largefireball);
             }
-    		attackTime = 80;
+    		attackTime = 120;
     	}
         
     }
-    
     protected String getDeathSound()
     {
         return "mob.blaze.death";

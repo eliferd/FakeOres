@@ -3,6 +3,7 @@ package fr.elias.fakeores.dimension;
 import java.util.Iterator;
 
 import fr.elias.fakeores.common.EntityDimensionMob;
+import fr.elias.fakeores.common.EntityNopeGrenade;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityItem;
@@ -13,7 +14,7 @@ public class EntityTeleporter
 {
 	public static Entity teleportToDim(Entity entity, int targetDimId)
 	{
-		if(!entity.worldObj.isRemote && !entity.isDead && !(entity instanceof EntityDimensionMob))
+		if(!entity.worldObj.isRemote && !entity.isDead && !(entity instanceof EntityDimensionMob) && !(entity instanceof EntityNopeGrenade))
 		{
 			entity.worldObj.theProfiler.startSection("changeDimension");
 			MinecraftServer minecraftserver = MinecraftServer.getServer();

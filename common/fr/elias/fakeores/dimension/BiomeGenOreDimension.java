@@ -13,6 +13,7 @@ import fr.elias.fakeores.common.EntityNopeGuy;
 import fr.elias.fakeores.common.EntityPlayerHunter;
 import fr.elias.fakeores.common.EntityRegenEgg;
 import fr.elias.fakeores.common.EntitySchaza;
+import fr.elias.fakeores.common.EntityStalker;
 import fr.elias.fakeores.common.FakeOres;
 
 public class BiomeGenOreDimension extends BiomeGenBase
@@ -48,6 +49,10 @@ public class BiomeGenOreDimension extends BiomeGenBase
 		if(FakeOres.spawn_DangerousPlant)
 		{
 			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityDangerousPlant.class, 5, 1, 1));
+		}
+		if(FakeOres.spawn_Stalker)
+		{
+			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityStalker.class, 12, 1, 1));
 		}
 		this.topBlock = FakeOres.fd_grass;
 		this.fillerBlock = FakeOres.fd_dirt;

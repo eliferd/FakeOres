@@ -9,6 +9,7 @@ public class RenderBlackMage extends RenderLiving {
 
 	public static final ResourceLocation texture1 = new ResourceLocation("fakeores:textures/entity/BlackMage1.png");
 	public static final ResourceLocation texture2 = new ResourceLocation("fakeores:textures/entity/BlackMage2.png");
+	public static final ResourceLocation texture3 = new ResourceLocation("fakeores:textures/entity/BlackMage3.png");
 	
 	public RenderBlackMage() 
 	{
@@ -18,7 +19,7 @@ public class RenderBlackMage extends RenderLiving {
 	
 	protected ResourceLocation setEntityTexture(EntityBlackMage var1) 
 	{
-		return var1.getRNG().nextInt(9) == 0 ? texture1 : texture2;
+		return var1.getRNG().nextInt(2) == 0 ? texture3 : (var1.getRNG().nextInt(1) == 0 ? texture2 : texture1);
 	}
 	
 	@Override

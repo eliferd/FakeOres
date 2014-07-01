@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 ext.buildnumber = 0
 
-version = "1.4.0" // a modifier lors du changement de version
+version = "1.5" // a modifier lors du changement de version
 group= "fr.elias.fakeores" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "fakeores"
 

@@ -25,6 +25,7 @@ entity.NopeGuy.name=Nope Guy
 entity.RegenEgg.name=Regeneration Egg
 entity.NopeGrenade.name=Nope Grenade
 entity.DangerousPlant.name=Dangerous Plant
+entity.Stalker.name=Stalker
 
 #items
 item.antiOresBlade.name=Anti Ores Blade
@@ -53,17 +54,17 @@ item.fd_stone_hoe.name=Fake Dimension Cobblestone Hoe
 item.fd_stone_spade.name=Fake Dimension Cobblestone Spade
 
 #blocks
-tile.fakeDiamondOre.name=Fake Ore
-tile.fakeGoldOre.name=Fake Ore
-tile.fakeEmeraldOre.name=Fake Ore
-tile.fakeIronOre.name=Fake Ore
-tile.fakeCoalOre.name=Fake Ore
-tile.fakeRedstoneOre.name=Fake Ore
-tile.fakeNetherQuartz.name=Fake Ore
-tile.fakeLapisLazuli.name=Fake Ore
-tile.fakeCopper.name=Fake Ore
-tile.fakeTin.name=Fake Ore
-tile.fakeUranium.name=Fake Ore
+tile.fakeDiamondOre.name=Diamond Ore
+tile.fakeGoldOre.name=Gold Ore
+tile.fakeEmeraldOre.name=Emerald Ore
+tile.fakeIronOre.name=Iron Ore
+tile.fakeCoalOre.name=Coal Ore
+tile.fakeRedstoneOre.name=Redstone Ore
+tile.fakeNetherQuartz.name=Nether Quartz Ore
+tile.fakeLapisLazuli.name=Lapis Lazuli Ore
+tile.fakeCopper.name=Copper Ore
+tile.fakeTin.name=Tin Ore
+tile.fakeUranium.name=Uranium Ore
 tile.antiOreStone.name=Anti Ore Stone
 tile.fd_grass.name=Fake Dimension Grass
 tile.fd_second_grass.name=Fake Dimension Grass
