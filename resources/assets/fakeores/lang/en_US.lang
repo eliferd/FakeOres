@@ -52,6 +52,7 @@ item.fd_stone_pickaxe.name=Fake Dimension Cobblestone Pickaxe
 item.fd_stone_sword.name=Fake Dimension Cobblestone Sword
 item.fd_stone_hoe.name=Fake Dimension Cobblestone Hoe
 item.fd_stone_spade.name=Fake Dimension Cobblestone Spade
+item.fd_strangeliquid_bucket.name=Strange Liquid Bucket
 
 #blocks
 tile.fakeDiamondOre.name=Diamond Ore
@@ -81,3 +82,4 @@ tile.fd_blurk_block.name=Blurk Block
 tile.fd_daren_block.name=Daren Block
 tile.fd_purlight_block.name=Purlight Block
 tile.fd_rainbow_block.name=Rainbow Block
+tile.fd_strangeliquid.name=Strange Liquid

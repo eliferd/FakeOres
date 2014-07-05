@@ -162,7 +162,7 @@ public class FD_ChunkProvider implements IChunkProvider
 								}
 								else if(k2 * 8 + l2 < b0)
 								{
-									surfaceBlock[j3 += short1] = Blocks.water;
+									surfaceBlock[j3 += short1] = FakeOres.fd_strangeliquid;
 								}
 								else
 								{

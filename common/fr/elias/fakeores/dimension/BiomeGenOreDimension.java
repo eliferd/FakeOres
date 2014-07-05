@@ -117,7 +117,7 @@ public class BiomeGenOreDimension extends BiomeGenBase
                                 }
                                 else
                                 {
-                                    block = Blocks.water;
+                                    block = FakeOres.fd_strangeliquid;
                                     b0 = 0;
                                 }
                             }

@@ -7,9 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -19,6 +17,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -46,6 +47,8 @@ public class FakeOres
 	@Instance("fakeores")
 	public static FakeOres instance;
 
+	public static Fluid strange = new Fluid("strange").setLuminosity(25).setViscosity(650).setUnlocalizedName("strangeLiquid");
+	
 	public static DamageSource antiorestone;
 	public static final CreativeTabs fakeOresTab = new CreativeTabs("fakeorestab")
 	{
@@ -81,7 +84,8 @@ public class FakeOres
 						fd_rainbow_ore,
 						fd_rainbow_block,
 						antiOreStone,
-						fd_second_grass;
+						fd_second_grass,
+						fd_strangeliquid;
 	public static Item antiOresBlade, 
 					   fragment_part1, 
 					   fragment_part2,
@@ -108,7 +112,8 @@ public class FakeOres
 					   fd_stone_axe,
 					   fd_stone_sword,
 					   fd_stone_hoe,
-					   fd_stone_spade;
+					   fd_stone_spade,
+					   fd_strangeliquid_bucket;
 
 	public static int dimID;
 	public int mainBiomeID,
@@ -216,6 +221,8 @@ public class FakeOres
 		{
 			System.out.print("[FAKE ORES] INDUSTRIAL CRAFT² DETECTED ! LOADING FAKE IC2 ORES");
 		}
+		FluidRegistry.registerFluid(strange);
+
 		/** INIT PART [ITEMS] **/
 		antiOresBlade = new ItemSword(Item.ToolMaterial.WOOD).setCreativeTab(FakeOres.fakeOresTab).setUnlocalizedName("antiOresBlade").setTextureName("fakeores:antiOresBlade");
 		fragment_part1 = new Item().setCreativeTab(FakeOres.fakeOresTab).setUnlocalizedName("bossframe_part1").setTextureName("fakeores:frame_part1");
@@ -259,13 +266,14 @@ public class FakeOres
 		fd_purlight_block = new BlockBase(Material.iron).setHardness(3.5F).setBlockName("fd_purlight_block").setBlockTextureName("fakeores:purlight_block");
 		fd_rainbow_block = new BlockBase(Material.iron).setHardness(3.5F).setBlockName("fd_rainbow_block").setBlockTextureName("fakeores:rainbow_block");		
 		antiOreStone = new BlockAntiOreStone().setHardness(4.0F).setResistance(6F).setStepSound(Block.soundTypeStone).setBlockTextureName("fakeores:antiorestone").setBlockName("antiOreStone");
+		fd_strangeliquid = new BlockStrangeLiquid(strange, Material.water).setBlockName("fd_strangeliquid");
+		fd_strangeliquid_bucket = new ItemStrangeLiquidBucket(fd_strangeliquid).setUnlocalizedName("fd_strangeliquid_bucket").setCreativeTab(fakeOresTab).setTextureName("fakeores:strangeLiquidBucket").setContainerItem(Items.bucket);
 		if(Loader.isModLoaded("IC2"))
 		{
 			fakeCopper = new BlockFakeOres().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockTextureName("ic2:blockOreCopper").setBlockName("fakeCopper");
 			fakeTin = new BlockFakeOres().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockTextureName("ic2:blockOreTin").setBlockName("fakeTin");
 			fakeUranium = new BlockFakeOres().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockTextureName("ic2:blockOreUran").setBlockName("fakeUranium");
 		}
-		
 		/** REGISTRY PART **/
 		// REGISTRY [BLOCKS]
 		GameRegistry.registerBlock(fakeOreVanilla, ItemBlockFakeOreVanilla.class, "fakeores");
@@ -285,6 +293,7 @@ public class FakeOres
 		GameRegistry.registerBlock(fd_rainbow_block, "fd_rainbow_block");
 		GameRegistry.registerBlock(antiOreStone, "antiOreStone");
 		GameRegistry.registerBlock(fd_second_grass, "fd_second_grass");
+		GameRegistry.registerBlock(fd_strangeliquid, "fd_strangeliquid");
 		if(Loader.isModLoaded("IC2"))
 		{
 			GameRegistry.registerBlock(fakeCopper, "fakeCopper");
@@ -311,7 +320,8 @@ public class FakeOres
 		GameRegistry.registerItem(letter_e, "letter_e", "fakeores");
 		GameRegistry.registerItem(nope_word, "nope_word", "fakeores");
 		GameRegistry.registerItem(nopeGrenade, "nopeGrenade", "fakeores");
-
+		GameRegistry.registerItem(fd_strangeliquid_bucket, "fd_strangeliquid_bucket", "fakeores");
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("strange", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(fd_strangeliquid_bucket), new ItemStack(Items.bucket));
 		GameRegistry.registerItem(fd_stone_pickaxe, "fd_stone_pickaxe", "fakeores");
 		GameRegistry.registerItem(fd_stone_axe, "fd_stone_axe", "fakeores");
 		GameRegistry.registerItem(fd_stone_sword, "fd_stone_sword", "fakeores");
@@ -339,11 +349,15 @@ public class FakeOres
 		GameRegistry.registerItem(texture_CustomSmokeFX_particle, "texture_CustomSmokeFX_particle");
 		GameRegistry.registerItem(texture_BloodFX_particle, "texture_BloodFX_particle");
 		GameRegistry.registerItem(texture_NopeFX_particle, "texture_NopeFX_particle");
+		
+		BucketHandler.INSTANCE.buckets.put(fd_strangeliquid, fd_strangeliquid_bucket);
+		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+
 		addEntity(EntityDiamondOre.class, "DiamondOre", mob_diamondOreID);
 		addEntity(EntityEmeraldOre.class, "EmeraldOre", mob_emeraldOreID);
 		addEntity(EntityGoldOre.class, "GoldOre", mob_goldOreID);
