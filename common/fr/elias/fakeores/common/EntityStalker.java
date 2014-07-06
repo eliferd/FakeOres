@@ -32,7 +32,7 @@ public class EntityStalker extends EntityCreature
     }
 	public void onLivingUpdate()
 	{
-		List list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(16D, 4D, 16D));
+		List list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(16D, 4D, 16D));
 		PathEntity pathentity;
 		for(int i = 0; i< list.size(); i++)
 		{
@@ -116,7 +116,7 @@ public class EntityStalker extends EntityCreature
 
 	public void updateEntityActionState()
 	{
-		List list = worldObj.getEntitiesWithinAABB(EntityCreature.class, AxisAlignedBB.getAABBPool().getAABB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(16D, 4D, 16D));
+		List list = worldObj.getEntitiesWithinAABB(EntityCreature.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(16D, 4D, 16D));
 		for(int i = 0; i< list.size(); i++)
 		{
 			Entity entity = (Entity)list.get(i);

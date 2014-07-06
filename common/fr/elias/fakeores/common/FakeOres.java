@@ -38,7 +38,7 @@ import fr.elias.fakeores.dimension.FD_BlockPortal;
 import fr.elias.fakeores.dimension.FD_WorldProvider;
 import fr.elias.fakeores.dimension.SecondBiomeGenOreDimension;
 
-@Mod(modid = "fakeores", name = "Fake Ores", version = "@VERSION@") // changer le build.gradle
+@Mod(modid = "fakeores", name = "Fake Ores", version = "@VERSION@") // build.gradle
 public class FakeOres
 {
 	@SidedProxy(clientSide = "fr.elias.fakeores.client.ClientProxy", serverSide = "fr.elias.fakeores.common.StaticProxy")
