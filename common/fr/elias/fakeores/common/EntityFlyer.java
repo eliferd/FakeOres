@@ -89,7 +89,7 @@ public class EntityFlyer extends EntityDimensionMob
         			{
         				EntityFlyer_Shield shield = new EntityFlyer_Shield(worldObj);
         				shield.setPosition(posX, posY, posZ);
-        				List list = worldObj.getEntitiesWithinAABB(EntityFlyer_Shield.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(16D, 4D, 16D));
+        				List list = worldObj.getEntitiesWithinAABB(EntityFlyer_Shield.class, AxisAlignedBB.getAABBPool().getAABB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(16D, 4D, 16D));
         				if(getHealth() > 5.0F) 
         				{
             				if(list.isEmpty())

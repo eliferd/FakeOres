@@ -59,7 +59,7 @@ public class FD_WorldProvider extends WorldProvider
 	@Override
 	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks)
 	{
-		return Vec3.createVectorHelper(1.2, 0.2, 0.2);
+		return this.worldObj.getWorldVec3Pool().getVecFromPool(1.2, 0.2, 0.2);
 	}
 
 	@Override

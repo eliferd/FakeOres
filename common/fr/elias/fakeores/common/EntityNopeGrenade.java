@@ -95,7 +95,7 @@ public class EntityNopeGrenade extends EntityItem
         prevPosZ = posZ;
         moveEntity(motionX, motionY, motionZ);
         boolean flag = false;
-        List list = worldObj.getEntitiesWithinAABB(EntityCreature.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(1D, 1D, 1D));
+        List list = worldObj.getEntitiesWithinAABB(EntityCreature.class, AxisAlignedBB.getAABBPool().getAABB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(1D, 1D, 1D));
         for(int i = 0; i< list.size(); i++)
         {
         	Entity entity = (Entity)list.get(i);

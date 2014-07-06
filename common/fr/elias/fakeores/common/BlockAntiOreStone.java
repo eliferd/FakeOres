@@ -48,7 +48,7 @@ public class BlockAntiOreStone extends Block {
     	removeNearBlock(world, x - 1, y, z);
     	removeNearBlock(world, x, y - 1, z);
     	removeNearBlock(world, x, y, z - 1);
-    	AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox((double)x, (double)y, (double)z, (double)(x + 1), (double)(y + 1), (double)(z + 1)).expand(1, 1, 1);
+    	AxisAlignedBB aabb = AxisAlignedBB.getAABBPool().getAABB((double)x, (double)y, (double)z, (double)(x + 1), (double)(y + 1), (double)(z + 1)).expand(1, 1, 1);
     	List list = world.getEntitiesWithinAABB(EntityOres.class, aabb);
     	if(list.size() > 0)
     	{
