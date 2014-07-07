@@ -3,6 +3,8 @@ package fr.elias.fakeores.common;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -21,34 +23,40 @@ public class BlockStrangeLiquid extends BlockFluidClassic {
 		this.setCreativeTab(FakeOres.fakeOresTab);
 	}
     @Override
-    public IIcon getIcon(int side, int meta) {
-            return (side == 0 || side == 1)? stillIcon : flowingIcon;
+    public IIcon getIcon(int side, int meta)
+    {
+    	return (side == 0 || side == 1)? stillIcon : flowingIcon;
     }
     
     public void onEntityWalking(World world, int x, int y, int z, Entity entity)
     {
     	super.onEntityWalking(world, x, y, z, entity);
-        entity.motionX = world.rand.nextFloat();
-        entity.motionY = world.rand.nextFloat();
-        entity.motionZ = world.rand.nextFloat();
-        if(world.isRemote)
-        {
-        	world.spawnParticle("largesmoke", entity.posX, entity.posY, entity.posZ, 0.0D, 0.0D, 0.0D);
-        }
+    	if(world.rand.nextInt(65) == 0)
+    	{
+        	entity.motionX = world.rand.nextDouble();
+        	entity.motionY += 0.5D;
+        	entity.motionZ = world.rand.nextDouble();
+    	}
+
         if(world.rand.nextInt(40) == 0)
         {
         	world.createExplosion(entity, x, y, z, 2F, false);
         }
     }
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) 
-    {    	
-        entity.motionX = world.rand.nextFloat() * 0.7F;
-        entity.motionY = world.rand.nextFloat() * 0.4F;
-        entity.motionZ = world.rand.nextFloat() * 0.7F;
+    {   
+    	if(world.rand.nextInt(65) == 0)
+    	{
+        	entity.motionX = world.rand.nextDouble();
+        	entity.motionY += 0.5D;
+        	entity.motionZ = world.rand.nextDouble();
+    	}
+
         if(world.rand.nextInt(40) == 0)
         {
         	world.createExplosion(entity, x, y, z, 2F, false);
         }
+        super.onEntityCollidedWithBlock(world, x, y, z, entity);
     }
     @SideOnly(Side.CLIENT)
     @Override

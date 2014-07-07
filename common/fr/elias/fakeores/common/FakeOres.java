@@ -1,7 +1,9 @@
 package fr.elias.fakeores.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -48,7 +50,6 @@ public class FakeOres
 	public static FakeOres instance;
 
 	public static Fluid strange = new Fluid("strange").setLuminosity(25).setViscosity(650).setUnlocalizedName("strangeLiquid");
-	
 	public static DamageSource antiorestone;
 	public static final CreativeTabs fakeOresTab = new CreativeTabs("fakeorestab")
 	{
@@ -357,7 +358,6 @@ public class FakeOres
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-
 		addEntity(EntityDiamondOre.class, "DiamondOre", mob_diamondOreID);
 		addEntity(EntityEmeraldOre.class, "EmeraldOre", mob_emeraldOreID);
 		addEntity(EntityGoldOre.class, "GoldOre", mob_goldOreID);
