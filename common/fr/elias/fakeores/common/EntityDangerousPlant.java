@@ -1,5 +1,8 @@
 package fr.elias.fakeores.common;
 
+import java.util.List;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -18,15 +22,7 @@ public class EntityDangerousPlant extends EntityCreature
 	{
 		super(par1World);
 		isPoisonous = rand.nextInt(10) == 0 ? true : false;
-		setSize(0.8F, 0.2F);
-	}
-	public void onLivingUpdate()
-	{
-		if(worldObj.getBlock((int)posX, (int)posY - 1, (int)posZ) == Blocks.air && !onGround)
-		{
-			this.posY--;
-		}
-		super.onLivingUpdate();
+		setSize(0.8F, 0.1F);
 	}
 	public void applyEntityAttributes()
 	{
@@ -53,14 +49,44 @@ public class EntityDangerousPlant extends EntityCreature
 	{
 		return true;
 	}
-	public boolean canBePushed()
-	{
-		return false;
-	}
+    public AxisAlignedBB getCollisionBox(Entity p_70114_1_)
+    {
+        return p_70114_1_.boundingBox;
+    }
+    
+    public AxisAlignedBB getBoundingBox()
+    {
+        return this.boundingBox;
+    }
     public boolean canBeCollidedWith()
     {
-        return false;
+        return !this.isDead;
     }
+    public boolean canBePushed()
+    {
+    	return false;
+    }
+	public void onUpdate()
+	{
+		super.onUpdate();
+        if (!this.worldObj.isRemote)
+        {
+            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.8D, 0.1D, 0.8D));
+
+            if (list != null && !list.isEmpty())
+            {
+                for (int k1 = 0; k1 < list.size(); ++k1)
+                {
+                    Entity entity = (Entity)list.get(k1);
+
+                    if (entity.canBePushed() && entity instanceof EntityDangerousPlant)
+                    {
+                        entity.applyEntityCollision(this);
+                    }
+                }
+            }
+        }
+	}
 	public boolean isMovementBlocked()
 	{
 		return true;

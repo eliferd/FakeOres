@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -40,7 +42,7 @@ import fr.elias.fakeores.dimension.FD_BlockPortal;
 import fr.elias.fakeores.dimension.FD_WorldProvider;
 import fr.elias.fakeores.dimension.SecondBiomeGenOreDimension;
 
-@Mod(modid = "fakeores", name = "Fake Ores", version = "@VERSION@") // changer le build.gradle
+@Mod(modid = "fakeores", name = "Fake Ores", version = "@VERSION@")
 public class FakeOres
 {
 	@SidedProxy(clientSide = "fr.elias.fakeores.client.ClientProxy", serverSide = "fr.elias.fakeores.common.StaticProxy")
@@ -58,6 +60,8 @@ public class FakeOres
 	        return FakeOres.antiOresBlade;
 	    }
 	};
+	
+	public static final ItemArmor.ArmorMaterial blurkArmorMaterial = EnumHelper.addArmorMaterial("blurkArmorMaterial", 25, new int[] {10, 9, 8, 7}, 15);
 	
 	protected static final BiomeGenBase.Height height_fd_Biome = new BiomeGenBase.Height(0.0F, 0.5F);
 	
@@ -114,7 +118,12 @@ public class FakeOres
 					   fd_stone_sword,
 					   fd_stone_hoe,
 					   fd_stone_spade,
-					   fd_strangeliquid_bucket;
+					   fd_strangeliquid_bucket,
+					   
+					   fd_blurk_helmet,
+					   fd_blurk_chestplate,
+					   fd_blurk_leggins,
+					   fd_blurk_boots;
 
 	public static int dimID;
 	public int mainBiomeID,
@@ -269,6 +278,10 @@ public class FakeOres
 		antiOreStone = new BlockAntiOreStone().setHardness(4.0F).setResistance(6F).setStepSound(Block.soundTypeStone).setBlockTextureName("fakeores:antiorestone").setBlockName("antiOreStone");
 		fd_strangeliquid = new BlockStrangeLiquid(strange, Material.water).setBlockName("fd_strangeliquid");
 		fd_strangeliquid_bucket = new ItemStrangeLiquidBucket(fd_strangeliquid).setUnlocalizedName("fd_strangeliquid_bucket").setCreativeTab(fakeOresTab).setTextureName("fakeores:strangeLiquidBucket").setContainerItem(Items.bucket);
+		fd_blurk_helmet = new ItemBlurkArmor(this.blurkArmorMaterial, 0).setUnlocalizedName("fd_blurk_helmet").setTextureName("fakeores:fd_blurk_helmet");
+		fd_blurk_chestplate = new ItemBlurkArmor(this.blurkArmorMaterial, 1).setUnlocalizedName("fd_blurk_chestplate").setTextureName("fakeores:fd_blurk_chestplate");
+		fd_blurk_leggins = new ItemBlurkArmor(this.blurkArmorMaterial, 2).setUnlocalizedName("fd_blurk_leggins").setTextureName("fakeores:fd_blurk_leggins");
+		fd_blurk_boots = new ItemBlurkArmor(this.blurkArmorMaterial, 3).setUnlocalizedName("fd_blurk_boots").setTextureName("fakeores:fd_blurk_boots");
 		if(Loader.isModLoaded("IC2"))
 		{
 			fakeCopper = new BlockFakeOres().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockTextureName("ic2:blockOreCopper").setBlockName("fakeCopper");
@@ -328,6 +341,12 @@ public class FakeOres
 		GameRegistry.registerItem(fd_stone_sword, "fd_stone_sword", "fakeores");
 		GameRegistry.registerItem(fd_stone_spade, "fd_stone_spade", "fakeores");
 		GameRegistry.registerItem(fd_stone_hoe, "fd_stone_hoe", "fakeores");
+
+		GameRegistry.registerItem(fd_blurk_helmet, "fd_blurk_helmet", "fakeores");
+		GameRegistry.registerItem(fd_blurk_chestplate, "fd_blurk_chestplate", "fakeores");
+		GameRegistry.registerItem(fd_blurk_leggins, "fd_blurk_leggins", "fakeores");
+		GameRegistry.registerItem(fd_blurk_boots, "fd_blurk_boots", "fakeores");
+		
 		
 		/** DIMENSION PART **/
 		mainODBiome = new BiomeGenOreDimension(mainBiomeID).setBiomeName("FakeOresBiome").setHeight(height_fd_Biome).setDisableRain();
@@ -408,6 +427,7 @@ public class FakeOres
 		GameRegistry.addRecipe(new ItemStack(this.nopeGrenade, 1), new Object[] {"RXR", "XBX", "RXR", 'X', Blocks.tnt, 'B', this.nope_word, 'R', this.fd_rainbow_ingot});
 		(new FakeOres_RecipeTools()).addRecipes(CraftingManager.getInstance());
 		(new FakeOres_RecipeWeapons()).addRecipes(CraftingManager.getInstance());
+		(new Fakeores_RecipeArmor()).addRecipes(CraftingManager.getInstance());
 	}
 
 	public void addEntity(Class<? extends Entity> entityClass, String entityName, int id)

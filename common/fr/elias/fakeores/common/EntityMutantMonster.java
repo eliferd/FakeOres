@@ -1,6 +1,8 @@
 package fr.elias.fakeores.common;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityMutantMonster extends EntityDimensionMob 

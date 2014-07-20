@@ -54,6 +54,11 @@ item.fd_stone_hoe.name=Fake Dimension Cobblestone Hoe
 item.fd_stone_spade.name=Fake Dimension Cobblestone Spade
 item.fd_strangeliquid_bucket.name=Strange Liquid Bucket
 
+item.fd_blurk_helmet.name=Blurk Helmet
+item.fd_blurk_chestplate.name=Blurk Chestplate
+item.fd_blurk_leggins.name=Blurk Leggings
+item.fd_blurk_boots.name=Blurk Boots
+
 #blocks
 tile.fakeDiamondOre.name=Diamond Ore
 tile.fakeGoldOre.name=Gold Ore

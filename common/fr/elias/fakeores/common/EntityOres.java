@@ -1,13 +1,17 @@
 package fr.elias.fakeores.common;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.Loader;
@@ -37,6 +41,51 @@ public class EntityOres extends EntityMob {
     protected String getDeathSound()
     {
         return "dig.stone";
+    }
+    /**
+     * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
+     * pushable on contact, like boats or minecarts.
+     */
+    public AxisAlignedBB getCollisionBox(Entity p_70114_1_)
+    {
+        return p_70114_1_.boundingBox;
+    }
+
+    /**
+     * returns the bounding box for this entity
+     */
+    public AxisAlignedBB getBoundingBox()
+    {
+        return this.boundingBox;
+    }
+    public boolean canBeCollidedWith()
+    {
+        return !this.isDead;
+    }
+    public boolean canBePushed()
+    {
+    	return true;
+    }
+    public void onUpdate()
+    {
+    	super.onUpdate();
+        if (!this.worldObj.isRemote)
+        {
+            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(16D, 16D, 16D));
+
+            if (list != null && !list.isEmpty())
+            {
+                for (int k1 = 0; k1 < list.size(); ++k1)
+                {
+                    Entity entity = (Entity)list.get(k1);
+
+                    if (entity.canBePushed() && entity instanceof EntityOres)
+                    {
+                        entity.applyEntityCollision(this);
+                    }
+                }
+            }
+        }
     }
 	public boolean attackEntityFrom(DamageSource damagesource, float f)
 	{

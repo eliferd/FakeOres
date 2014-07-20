@@ -71,6 +71,7 @@ public class TickClientHandlerEvent
 	 public void onRenderExperienceBar(RenderGameOverlayEvent event)
 	 {
 		final Minecraft mc = FMLClientHandler.instance().getClient();
+  		FontRenderer fontrenderer = mc.fontRenderer;
 	  	if(event.isCancelable() || event.type != ElementType.EXPERIENCE)
 	  	{
 	   		return;
@@ -80,7 +81,6 @@ public class TickClientHandlerEvent
 		{
 		  	if(mc.thePlayer.dimension == FakeOres.dimID || mc.thePlayer.dimension == 1)
 			{
-		  		FontRenderer fontrenderer = mc.fontRenderer;
 		  		if(mc.gameSettings.showDebugInfo)
 		  		{
 			  		fontrenderer.drawStringWithShadow("Fake Ores Finder doesn't work in this dimension !", 2, 125, 0xEC0101);

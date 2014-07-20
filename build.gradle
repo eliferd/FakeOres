@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 ext.buildnumber = 0
 
-version = "1.5" // a modifier lors du changement de version
+version = "1.6" // a modifier lors du changement de version
 group= "fr.elias.fakeores" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "fakeores"
 
@@ -31,7 +31,7 @@ else {
 }
 
 minecraft {
-    version = "1.7.10-10.13.0.1166"
+    version = "1.7.10-10.13.0.1186"
     assetDir = "build/assets"
 	
 	replace '@VERSION@', project.version

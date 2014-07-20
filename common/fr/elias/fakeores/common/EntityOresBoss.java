@@ -44,14 +44,14 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
     {
     	if(phase == 1)
     	{
-    		if(this.getHealth() < 550)
+    		if(this.getHealth() < 500)
     		{
     			phase = 2;
     		}
     	}
     	if(phase == 2)
     	{
-    		if(this.getHealth() < 300)
+    		if(this.getHealth() < 200)
     		{
     			phase = 3;
     		}
@@ -105,23 +105,7 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
     		{
         		attackEntityWithRangedAttack((EntityLivingBase)entity, f);
     		}
-    		if(rand.nextInt(100) == 0)
-    		{
-    			this.spawnSomeSbires("iron", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
-    			this.spawnSomeSbires("coal", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
-    			this.spawnSomeSbires("quartz", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
-    		}
-    		if(rand.nextInt(160) == 0)
-    		{
-    			this.spawnSomeSbires("redstone", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
-    			this.spawnSomeSbires("lapis", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
-    		}
-    		if(rand.nextInt(240) == 0)
-    		{
-    			this.spawnSomeSbires("gold", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
-    			this.spawnSomeSbires("diamond", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
-    		}
-    		if(rand.nextInt(320) == 0)
+    		if(rand.nextInt(220) == 0)
     		{
     			this.spawnSomeSbires("all", posX + rand.nextInt(5), posY + 3, posZ + rand.nextInt(5));
     		}
