@@ -65,9 +65,7 @@ public class FakeOres
 	
 	protected static final BiomeGenBase.Height height_fd_Biome = new BiomeGenBase.Height(0.0F, 0.5F);
 	
-	public static Item texture_CustomSmokeFX_particle,
-					   texture_BloodFX_particle,
-					   texture_NopeFX_particle;
+	public static Item texture_CustomSmokeFX_particle;
 	
 	public static FD_BlockGrass fd_grass;
 	
@@ -364,11 +362,7 @@ public class FakeOres
 		
 		/** PARTICLE PART **/
 		texture_CustomSmokeFX_particle = new ItemParticleTexture().setUnlocalizedName("texture_CustomSmokeFX_particle").setTextureName("fakeores:customsmoke");
-		texture_BloodFX_particle = new ItemParticleTexture().setUnlocalizedName("texture_BloodFX_particle").setTextureName("fakeores:bloodfx");
-		texture_NopeFX_particle = new ItemParticleTexture().setUnlocalizedName("texture_NopeFX_particle").setTextureName("fakeores:nope");
 		GameRegistry.registerItem(texture_CustomSmokeFX_particle, "texture_CustomSmokeFX_particle");
-		GameRegistry.registerItem(texture_BloodFX_particle, "texture_BloodFX_particle");
-		GameRegistry.registerItem(texture_NopeFX_particle, "texture_NopeFX_particle");
 		
 		BucketHandler.INSTANCE.buckets.put(fd_strangeliquid, fd_strangeliquid_bucket);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);

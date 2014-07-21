@@ -50,7 +50,10 @@ public class EntityDimensionMob extends EntityCreature
     {
     	if(isBloodable)
     	{
-    		FakeOres.proxy.spawnParticle(worldObj, "blood", posX, posY + 1, posZ);
+    		if(rand.nextInt(4) == 0)
+    		{
+        		FakeOres.proxy.spawnParticle(worldObj, "blood", posX, posY + 1, posZ);
+    		}
     	}
     }
     

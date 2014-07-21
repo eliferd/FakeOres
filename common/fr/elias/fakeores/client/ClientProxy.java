@@ -79,10 +79,10 @@ public class ClientProxy extends StaticProxy {
 			fx = new EntityCustomSmokeFX(world, x, y, z, 0.0D, 0.0D, 0.0D, 1F, FakeOres.texture_CustomSmokeFX_particle.getIconFromDamage(0));
 		}else if(name == "blood")
 		{
-			fx = new EntityBloodFX(world, x, y, z, 1F, FakeOres.texture_BloodFX_particle.getIconFromDamage(0));
+			fx = new EntityBloodFX(world, x, y, z, 1F);
 		}else if(name == "nope")
 		{
-			fx = new EntityNopeFX(world, x, y, z, 0.0D, 0.0D, 0.0D, 1F, FakeOres.texture_NopeFX_particle.getIconFromDamage(0), world.rand.nextInt(1) == 0? 2F : 0, world.rand.nextInt(1) == 0? 2F : 0F,world.rand.nextInt(1) == 0? 2F : 0F);
+			fx = new EntityNopeFX(world, x, y, z, 0.0D, 0.0D, 0.0D, 1F, world.rand.nextInt(1) == 0? 2F : 0, world.rand.nextInt(1) == 0? 2F : 0F,world.rand.nextInt(1) == 0? 2F : 0F);
 		}
 		Minecraft.getMinecraft().effectRenderer.addEffect(fx);
 	}
