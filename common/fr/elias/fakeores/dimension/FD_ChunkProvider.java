@@ -385,6 +385,18 @@ public class FD_ChunkProvider implements IChunkProvider
 			(new WorldGenDungeons()).generate(this.worldObj, this.rand, l1, i2, j2);
 		}
 
+		if(rand.nextInt(15) == 0)
+		{
+			for(k1 = 0; k1 < 8; ++k1)
+			{
+				l1 = k + this.rand.nextInt(16) + 8;
+				i2 = this.rand.nextInt(256);
+				int j2 = l + this.rand.nextInt(16) + 8;
+				(new WorldGenMaze()).generate(this.worldObj, this.rand, l1, i2, j2);
+			}
+		}
+		//TODO
+		
 		biomegenbase.decorate(this.worldObj, this.rand, k, l);
 		SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
 		k += 8;

@@ -59,7 +59,7 @@ public class EntityNopeGrenade extends EntityItem
     public EntityNopeGrenade(World world, EntityLivingBase entityliving)
     {
         this(world);
-        setAngles(entityliving.rotationYaw, 0.0F);
+        //setAngles(entityliving.rotationYaw, 0.0F);
         double d = -MathHelper.sin((entityliving.rotationYaw * (float)Math.PI) / 180F);
         double d1 = MathHelper.cos((entityliving.rotationYaw * (float)Math.PI) / 180F);
         motionX = initialVelocity * d * (double)MathHelper.cos((entityliving.rotationPitch / 180F) * (float)Math.PI);

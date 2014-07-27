@@ -72,6 +72,14 @@ public class EntityStalker extends EntityCreature
             this.attackTime = 10;
             this.attackEntityAsMob(par1Entity);
         }
+        if((par1Entity instanceof EntitySchaza) && ridingEntity == null)
+        {
+        	if(par1Entity.riddenByEntity == null)
+        	{
+            	this.mountEntity(par1Entity);
+            	this.entityToAttack = null;
+        	}
+        }
     }
 
     public boolean attackEntityAsMob(Entity par1Entity)
@@ -117,20 +125,20 @@ public class EntityStalker extends EntityCreature
 	public void updateEntityActionState()
 	{
 		List list = worldObj.getEntitiesWithinAABB(EntityCreature.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(16D, 4D, 16D));
-		for(int i = 0; i< list.size(); i++)
-		{
-			Entity entity = (Entity)list.get(i);
-			if(!list.isEmpty())
+			for(int i = 0; i< list.size(); i++)
 			{
-				if(!hasPath && !(entity instanceof EntityPlayer)&& !(entity instanceof EntityStalker) && !(entity instanceof EntityDangerousPlant) && !(entity instanceof EntityRegenEgg))
+				Entity entity = (Entity)list.get(i);
+				if(!list.isEmpty())
 				{
-					if(entity.getDistanceToEntity(this) < 8F)
+					if(!hasPath && !(entity instanceof EntityPlayer)&& !(entity instanceof EntityStalker) && !(entity instanceof EntityDangerousPlant) && !(entity instanceof EntityRegenEgg))
 					{
-						this.setTarget(entity);
+						if(entity.getDistanceToEntity(this) < 8F && ridingEntity == null)
+						{
+							this.setTarget(entity);
+						}
 					}
 				}
 			}
-		}
 		super.updateEntityActionState();
 	}
 }

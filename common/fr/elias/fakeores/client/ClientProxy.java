@@ -21,6 +21,7 @@ import fr.elias.fakeores.common.EntityGoldOre;
 import fr.elias.fakeores.common.EntityIronOre;
 import fr.elias.fakeores.common.EntityLapisLazuliOre;
 import fr.elias.fakeores.common.EntityMageSpell;
+import fr.elias.fakeores.common.EntityMazeCreature;
 import fr.elias.fakeores.common.EntityMutantMonster;
 import fr.elias.fakeores.common.EntityNetherQuartzOre;
 import fr.elias.fakeores.common.EntityNopeGrenade;
@@ -70,6 +71,7 @@ public class ClientProxy extends StaticProxy {
 			RenderingRegistry.registerEntityRenderingHandler(EntityUraniumOre.class, new RenderOre(new ModelOre()));
 		}
 		RenderingRegistry.registerEntityRenderingHandler(EntityStalker.class, new RenderStalker(new ModelBiped(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMazeCreature.class, new RenderMazeCreature());
 	}
 	public void spawnParticle(World world, String name, double x, double y, double z)
 	{

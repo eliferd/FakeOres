@@ -26,6 +26,7 @@ entity.RegenEgg.name=Regeneration Egg
 entity.NopeGrenade.name=Nope Grenade
 entity.DangerousPlant.name=Dangerous Plant
 entity.Stalker.name=Stalker
+entity.MazeCreature.name=Maze Creature
 
 #items
 item.antiOresBlade.name=Anti Ores Blade
@@ -58,6 +59,13 @@ item.fd_blurk_helmet.name=Blurk Helmet
 item.fd_blurk_chestplate.name=Blurk Chestplate
 item.fd_blurk_leggins.name=Blurk Leggings
 item.fd_blurk_boots.name=Blurk Boots
+
+item.mazeCreature_leather.name=Maze Creature Leather
+item.fire_orb.name=Fire Orb (WIP)
+item.water_orb.name=Water Orb (WIP)
+item.neutral_orb.name=Neutral Orb
+item.air_orb.name=Air Orb (WIP)
+item.spawnShield.name=Teleport you to spawn
 
 #blocks
 tile.fakeDiamondOre.name=Diamond Ore

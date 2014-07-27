@@ -18,7 +18,7 @@ public class EntityPlayerHunter extends EntityDimensionMob
 	public EntityPlayerHunter(World par1World)
 	{
 		super(par1World);
-		this.isHostile = worldObj.difficultySetting == EnumDifficulty.PEACEFUL ? false : true;
+		this.isHostile = par1World.difficultySetting == EnumDifficulty.PEACEFUL ? false : true;
 		setSize(0.5F, 1.3F);
 	}
 	

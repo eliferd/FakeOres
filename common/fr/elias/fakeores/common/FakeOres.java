@@ -17,6 +17,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -121,7 +122,14 @@ public class FakeOres
 					   fd_blurk_helmet,
 					   fd_blurk_chestplate,
 					   fd_blurk_leggins,
-					   fd_blurk_boots;
+					   fd_blurk_boots,
+					   
+					   mazeCreature_leather,
+					   fire_orb,
+					   water_orb,
+					   neutral_orb,
+					   air_orb,
+					   spawnShield;
 
 	public static int dimID;
 	public int mainBiomeID,
@@ -156,7 +164,8 @@ public class FakeOres
 			   mob_NOPE_GUY_ID,
 			   mob_NOPE_GRENADE_ID,
 			   mob_DANGEROUS_PLANT_ID,
-			   mob_STALKER_ID;
+			   mob_STALKER_ID,
+			   mob_MAZE_CREATURE_ID;
 	public static boolean spawn_PlayerHunter,
 				   		  spawn_Flyer,
 				   		  spawn_Schaza,
@@ -205,6 +214,7 @@ public class FakeOres
 			mob_NOPE_GRENADE_ID = config.get("Entity", "Nope Grenade ID", 382).getInt();
 			mob_DANGEROUS_PLANT_ID = config.get("Entity", "Dangerous Plant ID", 383).getInt();
 			mob_STALKER_ID = config.get("Entity", "Stalker ID", 384).getInt();
+			mob_MAZE_CREATURE_ID = config.get("Entity", "Maze Creature ID", 385).getInt();
 			
 			spawn_PlayerHunter = config.get("Spawn", "Spawn Player Hunter", true).getBoolean(true);
 			spawn_Flyer = config.get("Spawn", "Spawn Flyer", true).getBoolean(true);
@@ -227,7 +237,7 @@ public class FakeOres
 		}
 		if(Loader.isModLoaded("IC2"))
 		{
-			System.out.print("[FAKE ORES] INDUSTRIAL CRAFT² DETECTED ! LOADING FAKE IC2 ORES");
+			System.out.print("[FAKE ORES] INDUSTRIAL CRAFTï¿½ DETECTED ! LOADING FAKE IC2 ORES");
 		}
 		FluidRegistry.registerFluid(strange);
 
@@ -256,6 +266,12 @@ public class FakeOres
 		fd_stone_sword = new ItemSword(Item.ToolMaterial.STONE).setCreativeTab(fakeOresTab).setUnlocalizedName("fd_stone_sword").setTextureName("fakeores:fd_stone_sword");
 		fd_stone_hoe = new ItemHoe(Item.ToolMaterial.STONE).setCreativeTab(fakeOresTab).setUnlocalizedName("fd_stone_hoe").setTextureName("fakeores:fd_stone_hoe");
 		fd_stone_spade = new ItemSpade(Item.ToolMaterial.STONE).setCreativeTab(fakeOresTab).setUnlocalizedName("fd_stone_spade").setTextureName("fakeores:fd_stone_spade");
+		mazeCreature_leather = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("mazeCreature_leather").setTextureName("fakeores:mazeCreature_leather");
+		fire_orb = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("fire_orb").setTextureName("fakeores:fire_orb");
+		water_orb =  new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("water_orb").setTextureName("fakeores:water_orb");
+		neutral_orb =  new ItemNeutralOrb().setCreativeTab(fakeOresTab).setUnlocalizedName("neutral_orb").setTextureName("fakeores:neutral_orb");
+		air_orb =  new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("air_orb").setTextureName("fakeores:air_orb");
+		spawnShield = new ItemSpawnShield().setCreativeTab(fakeOresTab).setUnlocalizedName("spawnShield").setTextureName("fakeores:spawnShield");
 		/** INIT PART [BLOCKS] **/
 		fakeOreVanilla = new BlockFakeOresVanilla().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockName("fakeOre");
 		fd_grass = (FD_BlockGrass) new FD_BlockGrass("fakeores:oredimension_grass_top", "fakeores:oredimension_grass_side", this.fd_dirt, this.fd_grass).setHardness(0.6F).setStepSound(Block.soundTypeGrass).setBlockName("fd_grass");
@@ -344,6 +360,12 @@ public class FakeOres
 		GameRegistry.registerItem(fd_blurk_chestplate, "fd_blurk_chestplate", "fakeores");
 		GameRegistry.registerItem(fd_blurk_leggins, "fd_blurk_leggins", "fakeores");
 		GameRegistry.registerItem(fd_blurk_boots, "fd_blurk_boots", "fakeores");
+		GameRegistry.registerItem(mazeCreature_leather, "mazeCreature_leather");
+		GameRegistry.registerItem(fire_orb, "fire_orb");
+		GameRegistry.registerItem(water_orb, "water_orb");
+		GameRegistry.registerItem(neutral_orb, "neutral_orb");
+		GameRegistry.registerItem(air_orb, "air_orb");
+		GameRegistry.registerItem(spawnShield, "spawnShield");
 		
 		
 		/** DIMENSION PART **/
@@ -399,6 +421,7 @@ public class FakeOres
 		addEntity(EntityDangerousPlant.class, "DangerousPlant", mob_DANGEROUS_PLANT_ID);
 		EntityRegistry.registerModEntity(EntityNopeGrenade.class, "NopeGrenade", mob_NOPE_GRENADE_ID, this, 40, 1, true);
 		addEntity(EntityStalker.class, "Stalker", mob_STALKER_ID);
+		addEntity(EntityMazeCreature.class, "MazeCreature", mob_MAZE_CREATURE_ID);
 		proxy.loadRender();
 		GameRegistry.addRecipe(new ItemStack(this.antiOresBlade, 1), new Object[] {"X", "X", "B", 'X', this.antiOreStone, 'B', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(this.fragment_boss, 1), new Object[] {"XSB", "SFS", "CSD", 'X', this.fragment_part1, 'B', this.fragment_part2, 'F', Blocks.iron_block, 'C', this.fragment_part4, 'D', this.fragment_part3, 'S', Items.gold_ingot});
