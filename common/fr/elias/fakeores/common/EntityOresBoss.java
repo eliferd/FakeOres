@@ -217,14 +217,15 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
     	Entity entity = damagesource.getEntity();
     	if(entity != null && entity instanceof EntityPlayer)
     	{    	
-    		ItemStack itemstack = ((EntityPlayer)entity).getCurrentEquippedItem();
+    		/*ItemStack itemstack = ((EntityPlayer)entity).getCurrentEquippedItem();
     		if(itemstack != null)
     		{
     			if(itemstack.getItem() == Items.magma_cream)
     			{
     				f = 150f;
     			}
-    		}
+    		}*/
+    		
         	if(entity instanceof EntityLightningBolt)
         	{
         		f = 0f;
