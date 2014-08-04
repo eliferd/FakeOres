@@ -396,7 +396,6 @@ public class FD_ChunkProvider implements IChunkProvider
 			}
 		}
 		//TODO
-		
 		biomegenbase.decorate(this.worldObj, this.rand, k, l);
 		SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
 		k += 8;

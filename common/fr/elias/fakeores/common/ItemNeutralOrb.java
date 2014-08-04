@@ -14,19 +14,19 @@ public class ItemNeutralOrb extends Item
 	{
 		super();
 	}
-    public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_)
+    public boolean hitEntity(ItemStack itemstack, EntityLivingBase entityTarget, EntityLivingBase playerEntity)
     {
-        p_77644_1_.stackSize--;
-        EntityPlayer player = (EntityPlayer)p_77644_3_;
-        if(!(p_77644_2_ instanceof EntityOres) && !(p_77644_2_ instanceof EntityOresBoss))
+        itemstack.stackSize--;
+        EntityPlayer player = (EntityPlayer)playerEntity;
+        if(!(entityTarget instanceof EntityOres) && !(entityTarget instanceof EntityOresBoss))
         {
         	if(player.inventory.hasItem(Items.gunpowder))
         	{
-                p_77644_2_.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)p_77644_3_), Float.MAX_VALUE);
+                entityTarget.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)playerEntity), Float.MAX_VALUE);
                 player.inventory.consumeInventoryItem(Items.gunpowder);
         	}else 
         	{
-                p_77644_2_.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)p_77644_3_), Float.MIN_VALUE);
+                entityTarget.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)playerEntity), Float.MIN_VALUE);
         	}
         }
         return true;

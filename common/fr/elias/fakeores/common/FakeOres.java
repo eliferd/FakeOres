@@ -267,7 +267,7 @@ public class FakeOres
 		fd_stone_hoe = new ItemHoe(Item.ToolMaterial.STONE).setCreativeTab(fakeOresTab).setUnlocalizedName("fd_stone_hoe").setTextureName("fakeores:fd_stone_hoe");
 		fd_stone_spade = new ItemSpade(Item.ToolMaterial.STONE).setCreativeTab(fakeOresTab).setUnlocalizedName("fd_stone_spade").setTextureName("fakeores:fd_stone_spade");
 		mazeCreature_leather = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("mazeCreature_leather").setTextureName("fakeores:mazeCreature_leather");
-		fire_orb = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("fire_orb").setTextureName("fakeores:fire_orb");
+		fire_orb = new ItemFireOrb().setCreativeTab(fakeOresTab).setUnlocalizedName("fire_orb").setTextureName("fakeores:fire_orb");
 		water_orb =  new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("water_orb").setTextureName("fakeores:water_orb");
 		neutral_orb =  new ItemNeutralOrb().setCreativeTab(fakeOresTab).setUnlocalizedName("neutral_orb").setTextureName("fakeores:neutral_orb");
 		air_orb =  new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("air_orb").setTextureName("fakeores:air_orb");

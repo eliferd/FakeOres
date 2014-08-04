@@ -22,10 +22,10 @@ public class WorldGenMaze extends WorldGenerator
 	{
 		if(world.getBlock(x, y, z) != FakeOres.fd_stone || world.getBlock(x + 14, y + 4, z + 12) != FakeOres.fd_stone || world.getBlock(x, y + 4, z + 12) != FakeOres.fd_stone|| world.getBlock(x + 14, y, z) != FakeOres.fd_stone)
 		{
-			System.out.println("GENERATION FAILURE " + x + "  " + y + "   " + z);
+			System.out.println("[Fake Ores] MAZE NOT GENERATED AT " + x + "  " + y + "   " + z);
 			return false;
 		}
-		System.out.println("GENERATION SUCCESS " + x + "  " + y + "   " + z);
+		System.out.println("[Fake Ores] MAZE GENERATION SUCCESS " + x + "  " + y + "   " + z);
 		world.setBlock(x + 0, y + 0, z + 0, Blocks.bedrock);
 		world.setBlock(x + 0, y + 0, z + 1, Blocks.bedrock);
 		world.setBlock(x + 0, y + 0, z + 2, Blocks.bedrock);
