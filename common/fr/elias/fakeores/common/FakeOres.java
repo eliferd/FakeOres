@@ -129,6 +129,7 @@ public class FakeOres
 					   water_orb,
 					   neutral_orb,
 					   air_orb,
+					   air_orb_reversed,
 					   spawnShield;
 
 	public static int dimID;
@@ -268,9 +269,10 @@ public class FakeOres
 		fd_stone_spade = new ItemSpade(Item.ToolMaterial.STONE).setCreativeTab(fakeOresTab).setUnlocalizedName("fd_stone_spade").setTextureName("fakeores:fd_stone_spade");
 		mazeCreature_leather = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("mazeCreature_leather").setTextureName("fakeores:mazeCreature_leather");
 		fire_orb = new ItemFireOrb().setCreativeTab(fakeOresTab).setUnlocalizedName("fire_orb").setTextureName("fakeores:fire_orb");
-		water_orb =  new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("water_orb").setTextureName("fakeores:water_orb");
-		neutral_orb =  new ItemNeutralOrb().setCreativeTab(fakeOresTab).setUnlocalizedName("neutral_orb").setTextureName("fakeores:neutral_orb");
-		air_orb =  new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("air_orb").setTextureName("fakeores:air_orb");
+		water_orb = new Item().setCreativeTab(fakeOresTab).setUnlocalizedName("water_orb").setTextureName("fakeores:water_orb");
+		neutral_orb = new ItemNeutralOrb().setCreativeTab(fakeOresTab).setUnlocalizedName("neutral_orb").setTextureName("fakeores:neutral_orb");
+		air_orb = new ItemAirOrb("normal").setCreativeTab(fakeOresTab).setUnlocalizedName("air_orb").setTextureName("fakeores:air_orb");
+		air_orb_reversed = new ItemAirOrb("reversed").setCreativeTab(fakeOresTab).setUnlocalizedName("air_orb_reversed").setTextureName("fakeores:air_orb_reversed");
 		spawnShield = new ItemSpawnShield().setCreativeTab(fakeOresTab).setUnlocalizedName("spawnShield").setTextureName("fakeores:spawnShield");
 		/** INIT PART [BLOCKS] **/
 		fakeOreVanilla = new BlockFakeOresVanilla().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockName("fakeOre");
@@ -365,8 +367,8 @@ public class FakeOres
 		GameRegistry.registerItem(water_orb, "water_orb");
 		GameRegistry.registerItem(neutral_orb, "neutral_orb");
 		GameRegistry.registerItem(air_orb, "air_orb");
+		GameRegistry.registerItem(air_orb_reversed, "air_orb_reversed");
 		GameRegistry.registerItem(spawnShield, "spawnShield");
-		
 		
 		/** DIMENSION PART **/
 		mainODBiome = new BiomeGenOreDimension(mainBiomeID).setBiomeName("FakeOresBiome").setHeight(height_fd_Biome).setDisableRain();
@@ -442,6 +444,7 @@ public class FakeOres
 		GameRegistry.addRecipe(new ItemStack(this.fd_passcard_schaza, 1), new Object[] {"XXX", "XSX", "XXX", 'X', Items.paper, 'S', new ItemStack(Items.dye, 1, 0)});
 		GameRegistry.addShapelessRecipe(new ItemStack(this.nope_word, 1), new Object[] {this.letter_n, this.letter_o, this.letter_p, this.letter_e});
 		GameRegistry.addRecipe(new ItemStack(this.nopeGrenade, 1), new Object[] {"RXR", "XBX", "RXR", 'X', Blocks.tnt, 'B', this.nope_word, 'R', this.fd_rainbow_ingot});
+		GameRegistry.addShapelessRecipe(new ItemStack(this.air_orb_reversed, 1), new Object[] {this.air_orb, Items.iron_ingot});
 		(new FakeOres_RecipeTools()).addRecipes(CraftingManager.getInstance());
 		(new FakeOres_RecipeWeapons()).addRecipes(CraftingManager.getInstance());
 		(new Fakeores_RecipeArmor()).addRecipes(CraftingManager.getInstance());

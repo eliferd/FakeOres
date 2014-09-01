@@ -2,6 +2,10 @@ package fr.elias.fakeores.common;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.monster.EntityMob;
@@ -20,7 +24,17 @@ public class ItemFireOrb extends Item
 		super();
 		setMaxDamage(256);
 	}
-	
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List list, boolean p_77624_4_)
+    {
+    	if(Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+    	{
+        	list.add("Just hold item in your hand");
+        	list.add("and move near any entity, ENJOY ! :D");	
+    	}else{
+    		list.add("Press 'SHIFT' for more information.");
+    	}
+    }
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int slot, boolean isHeldedByPlayer)
     {
     	EntityPlayer player = (EntityPlayer) entity;
