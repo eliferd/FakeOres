@@ -2,17 +2,16 @@ package fr.elias.fakeores.common;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemFragmentBoss extends Item {
 
@@ -29,25 +28,22 @@ public class ItemFragmentBoss extends Item {
     {
         return true;
     }
-    public boolean onItemUse(ItemStack stack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         stack.stackSize--;
-        if (par3World.isRemote)
+        if (!worldIn.isRemote)
         {
-            return true;
-        }
-        else
-        {
-    		EntityOresBoss boss = new EntityOresBoss(par3World);
-    		boss.setLocationAndAngles((double)par4 + 0.5D, (double)par5 + 0.5D, (double)par6 + 0.5D, MathHelper.wrapAngleTo180_float(par3World.rand.nextFloat() * 360.0F), 0.0F);
-    		par3World.spawnEntityInWorld(boss);
+    		EntityOresBoss boss = new EntityOresBoss(worldIn);
+    		boss.setLocationAndAngles((double)hitX + 0.5D, (double)hitY + 0.5D, (double)hitZ + 0.5D, MathHelper.wrapAngleTo180_float(worldIn.rand.nextFloat() * 360.0F), 0.0F);
+    		worldIn.spawnEntityInWorld(boss);
         	return true;
         }
+		return true;
     }
     
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack par1ItemStack)
     {
-        return EnumRarity.epic;
+        return EnumRarity.EPIC;
     }
 }

@@ -1,5 +1,6 @@
 package fr.elias.fakeores.client;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelCreeper;
@@ -27,8 +28,9 @@ public class RenderOre extends RenderLiving {
 	public static final ResourceLocation tin = new ResourceLocation("fakeores:textures/entity/tinOre.png");
 	public static final ResourceLocation uranium = new ResourceLocation("fakeores:textures/entity/uraniumOre.png");
 	public static final ResourceLocation noTexture = new ResourceLocation("fakeores:textures/entity/Ore.png");
+	
 	public RenderOre(ModelBase par1ModelBase) {
-		super(par1ModelBase, 0F);
+		super(Minecraft.getMinecraft().getRenderManager(), par1ModelBase, 0F);
 	}
 
     protected float setSpiderDeathMaxRotation(EntityOres par1EntitySpider)

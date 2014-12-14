@@ -12,11 +12,11 @@ public class AntiOreStoneDamageSource extends DamageSource {
 		super(par1Str);
 		this.setDamageBypassesArmor();
 	}
-    public IChatComponent func_151519_b(EntityLivingBase p_151519_1_)
+    public IChatComponent getDeathMessage(EntityLivingBase p_151519_1_)
     {
         EntityLivingBase entitylivingbase1 = p_151519_1_.func_94060_bK();
         String s = "deathMessage." + this.damageType;
         String s1 = s + ".player";
-        return entitylivingbase1 != null && StatCollector.canTranslate(s1) ? new ChatComponentTranslation(s1, new Object[] {p_151519_1_.func_145748_c_(), entitylivingbase1.func_145748_c_()}): new ChatComponentTranslation(s, new Object[] {p_151519_1_.func_145748_c_()});
+        return entitylivingbase1 != null && StatCollector.canTranslate(s1) ? new ChatComponentTranslation(s1, new Object[] {p_151519_1_.getDisplayName(), entitylivingbase1.getDisplayName()}): new ChatComponentTranslation(s, new Object[] {p_151519_1_.getDisplayName()});
     }
 }

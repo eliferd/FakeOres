@@ -69,14 +69,14 @@ item.air_orb_reversed.name=Air Orb Reversed
 item.spawnShield.name=Teleport you to spawn
 
 #blocks
-tile.fakeDiamondOre.name=Diamond Ore
-tile.fakeGoldOre.name=Gold Ore
-tile.fakeEmeraldOre.name=Emerald Ore
-tile.fakeIronOre.name=Iron Ore
-tile.fakeCoalOre.name=Coal Ore
-tile.fakeRedstoneOre.name=Redstone Ore
-tile.fakeNetherQuartz.name=Nether Quartz Ore
-tile.fakeLapisLazuli.name=Lapis Lazuli Ore
+tile.fakeDiamond.name=Diamond Ore
+tile.fakeGold.name=Gold Ore
+tile.fakeEmerald.name=Emerald Ore
+tile.fakeIron.name=Iron Ore
+tile.fakeCoal.name=Coal Ore
+tile.fakeRedstone.name=Redstone Ore
+tile.fakeQuartz.name=Nether Quartz Ore
+tile.fakeLapis.name=Lapis Lazuli Ore
 tile.fakeCopper.name=Copper Ore
 tile.fakeTin.name=Tin Ore
 tile.fakeUranium.name=Uranium Ore

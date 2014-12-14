@@ -2,20 +2,17 @@ package fr.elias.fakeores.common;
 
 import java.util.Random;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 
 public class BlockFakeOres extends Block {
 
@@ -25,9 +22,9 @@ public class BlockFakeOres extends Block {
 		setCreativeTab(FakeOres.fakeOresTab);
 	}
 
-	 public void onBlockDestroyedByPlayer(World par1World, int x, int y, int z, int metaData) 
+	 public void onBlockDestroyedByPlayer(World par1World, BlockPos pos, IBlockState state) 
 	 {
-		 if(FMLCommonHandler.instance().getEffectiveSide().isClient() && par1World.difficultySetting == EnumDifficulty.PEACEFUL)
+		 if(FMLCommonHandler.instance().getEffectiveSide().isClient() && par1World.getDifficulty() == EnumDifficulty.PEACEFUL)
 		 {
 			 FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText("Your Minecraft is in peaceful mode. All fake ores are now disabled. Please change your difficulty setting."));
 		 }
@@ -38,23 +35,23 @@ public class BlockFakeOres extends Block {
 					if(this == FakeOres.fakeCopper)
 					{
 						EntityCopperOre copperEntity = new EntityCopperOre(par1World);
-						copperEntity.setLocationAndAngles(x + 0.5, y, z + 0.5, 0.0F, 0.0F);
+						copperEntity.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.0F, 0.0F);
 						par1World.spawnEntityInWorld(copperEntity);
 					}
 					if(this == FakeOres.fakeTin)
 					{
 						EntityTinOre tinEntity = new EntityTinOre(par1World);
-						tinEntity.setLocationAndAngles(x + 0.5, y, z + 0.5, 0.0F, 0.0F);
+						tinEntity.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.0F, 0.0F);
 						par1World.spawnEntityInWorld(tinEntity);
 					}
 					if(this == FakeOres.fakeUranium)
 					{
 						EntityUraniumOre uraniumEntity = new EntityUraniumOre(par1World);
-						uraniumEntity.setLocationAndAngles(x + 0.5, y, z + 0.5, 0.0F, 0.0F);
+						uraniumEntity.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.0F, 0.0F);
 						par1World.spawnEntityInWorld(uraniumEntity);
 					}
 				}
-				super.onBlockDestroyedByPlayer(par1World, x, y, z, metaData);
+				super.onBlockDestroyedByPlayer(par1World, pos, state);
 		 }
 	 }
 	 public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_){return null;} // BugFix 1

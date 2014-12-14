@@ -1,22 +1,25 @@
 package fr.elias.fakeores.common;
 
-import java.util.EnumSet;
-
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import fr.elias.fakeores.client.ModelOre;
-import fr.elias.fakeores.client.RenderOre;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.entity.projectile.EntitySnowball;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -31,13 +34,20 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
         this.isImmuneToFire = true;
         this.experienceValue = 4750;
         setSize(3F, 5F);
+        this.tasks.addTask(4, new EntityOresBoss.AIAttackPhase());
+        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.5D));
+        this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(800D);
         this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(Double.MAX_VALUE);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(18D);
     }
     public void onLivingUpdate()
@@ -84,12 +94,12 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
     	if(phase == 1)
     	{
             double d0 = entity.posX - this.posX;
-            double d1 = entity.boundingBox.minY + (double)(entity.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
+            double d1 = entity.getEntityBoundingBox().minY + (double)(entity.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
             double d2 = entity.posZ - this.posZ;
             if(rand.nextInt(24) == 0)
             {
                 float f1 = MathHelper.sqrt_float(f) * 0.5F;
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1009, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1009, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
 
                 for (int i = 0; i < 1; ++i)
                 {
@@ -121,7 +131,46 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
         		attackEntityWithRangedAttack((EntityLivingBase)entity, f);
     		}
     	}
-    	super.attackEntity(entity, f);
+    }
+    public class AIAttackPhase extends EntityAIBase {
+
+    	public EntityOresBoss boss = EntityOresBoss.this;
+    	public int attackTime;
+    	public AIAttackPhase() {}
+    	
+		@Override
+		public boolean shouldExecute() {
+            EntityLivingBase entitylivingbase = this.boss.getAttackTarget();
+            return entitylivingbase != null && entitylivingbase.isEntityAlive();
+		}
+        public void updateTask()
+        {
+        	--attackTime;
+            EntityLivingBase entitylivingbase = this.boss.getAttackTarget();
+            double d0 = this.boss.getDistanceSqToEntity(entitylivingbase);
+
+            if (d0 < 4.0D)
+            {
+                if (this.attackTime <= 0)
+                {
+                    this.attackTime = 20;
+                    this.boss.attackEntityAsMob(entitylivingbase);
+                }
+                
+                this.boss.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);
+            }
+            else if (d0 < 256.0D)
+            {
+                // ATTACK ENTITY GOES HERE
+                boss.attackEntity(entitylivingbase, (float)d0);
+                this.boss.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
+            }
+            else
+            {
+                this.boss.getNavigator().clearPathEntity();
+                this.boss.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.5D);
+            }
+        }
     }
     public void spawnSomeSbires(String entityToSpawn, double x, double y, double z)
     {
@@ -188,7 +237,7 @@ public class EntityOresBoss extends EntityMob implements IBossDisplayData {
     }
     public Entity findPlayerToAttack()
     {
-        EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 32.0D);
+        EntityPlayer entityplayer = this.worldObj.getClosestPlayerToEntity(this, 32.0D);
         if(entityplayer != null && this.canEntityBeSeen(entityplayer))
         {
         	return entityplayer;

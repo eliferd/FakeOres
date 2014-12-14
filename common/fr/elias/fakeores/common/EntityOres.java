@@ -2,9 +2,7 @@ package fr.elias.fakeores.common;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -12,10 +10,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class EntityOres extends EntityMob {
 	public int type;
@@ -31,7 +30,7 @@ public class EntityOres extends EntityMob {
 	}
 	protected Entity findPlayerToAttack()
 	{
-		EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
+		EntityPlayer entityplayer = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
         return entityplayer != null && this.canEntityBeSeen(entityplayer) ? entityplayer : null;
 	}
     protected String getHurtSound()
@@ -48,7 +47,7 @@ public class EntityOres extends EntityMob {
      */
     public AxisAlignedBB getCollisionBox(Entity p_70114_1_)
     {
-        return p_70114_1_.boundingBox;
+        return p_70114_1_.getEntityBoundingBox();
     }
 
     /**
@@ -56,7 +55,7 @@ public class EntityOres extends EntityMob {
      */
     public AxisAlignedBB getBoundingBox()
     {
-        return this.boundingBox;
+        return this.getEntityBoundingBox();
     }
     public boolean canBeCollidedWith()
     {
@@ -71,7 +70,7 @@ public class EntityOres extends EntityMob {
     	super.onUpdate();
         if (!this.worldObj.isRemote)
         {
-            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(16D, 16D, 16D));
+            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(16D, 16D, 16D));
 
             if (list != null && !list.isEmpty())
             {
@@ -129,7 +128,7 @@ public class EntityOres extends EntityMob {
 	}
     public void deadByAntiOreStone(World world, int x, int y, int z)
     {
-    	if(world.getBlock(x, y, z) == FakeOres.antiOreStone)
+    	if(world.getBlockState(new BlockPos(x, y, z)) == FakeOres.antiOreStone)
     	{
     		this.attackEntityFrom(FakeOres.antiorestone, Float.MAX_VALUE);
     	}

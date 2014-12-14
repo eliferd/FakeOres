@@ -2,37 +2,15 @@ package fr.elias.fakeores.client;
 
 import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiIngame;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.Type;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import fr.elias.fakeores.common.FakeOres;
 
 public class TickClientHandlerEvent
@@ -71,7 +49,7 @@ public class TickClientHandlerEvent
 	 public void onRenderExperienceBar(RenderGameOverlayEvent event)
 	 {
 		final Minecraft mc = FMLClientHandler.instance().getClient();
-  		FontRenderer fontrenderer = mc.fontRenderer;
+  		FontRenderer fontrenderer = mc.fontRendererObj;
 	  	if(event.isCancelable() || event.type != ElementType.EXPERIENCE)
 	  	{
 	   		return;
@@ -79,7 +57,7 @@ public class TickClientHandlerEvent
 	  	ItemStack itemstack = mc.thePlayer.getCurrentEquippedItem();
 		if(itemstack != null && itemstack.getItem() == FakeOres.fakeOres_finder)
 		{
-		  	if(mc.thePlayer.dimension == FakeOres.dimID || mc.thePlayer.dimension == 1)
+		  	if(mc.thePlayer.dimension == 1)
 			{
 		  		if(mc.gameSettings.showDebugInfo)
 		  		{

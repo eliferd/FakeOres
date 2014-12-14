@@ -1,37 +1,22 @@
 package fr.elias.fakeores.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.Loader;
-import fr.elias.fakeores.common.EntityBlackMage;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Loader;
 import fr.elias.fakeores.common.EntityBossTeleporter;
 import fr.elias.fakeores.common.EntityCoalOre;
 import fr.elias.fakeores.common.EntityCopperOre;
-import fr.elias.fakeores.common.EntityDangerousPlant;
 import fr.elias.fakeores.common.EntityDiamondOre;
 import fr.elias.fakeores.common.EntityEmeraldOre;
-import fr.elias.fakeores.common.EntityFlyer;
-import fr.elias.fakeores.common.EntityFlyer_Shield;
 import fr.elias.fakeores.common.EntityGoldOre;
 import fr.elias.fakeores.common.EntityIronOre;
 import fr.elias.fakeores.common.EntityLapisLazuliOre;
-import fr.elias.fakeores.common.EntityMageSpell;
-import fr.elias.fakeores.common.EntityMazeCreature;
-import fr.elias.fakeores.common.EntityMutantMonster;
 import fr.elias.fakeores.common.EntityNetherQuartzOre;
-import fr.elias.fakeores.common.EntityNopeGrenade;
-import fr.elias.fakeores.common.EntityNopeGuy;
 import fr.elias.fakeores.common.EntityOresBoss;
-import fr.elias.fakeores.common.EntityPlayerHunter;
 import fr.elias.fakeores.common.EntityRedstoneOre;
-import fr.elias.fakeores.common.EntityRegenEgg;
-import fr.elias.fakeores.common.EntitySchaza;
-import fr.elias.fakeores.common.EntityStalker;
 import fr.elias.fakeores.common.EntityTinOre;
 import fr.elias.fakeores.common.EntityUraniumOre;
 import fr.elias.fakeores.common.FakeOres;
@@ -50,42 +35,23 @@ public class ClientProxy extends StaticProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityNetherQuartzOre.class, new RenderOre(new ModelOre()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLapisLazuliOre.class, new RenderOre(new ModelOre()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityOresBoss.class, new RenderOresBoss(new ModelOreBoss(), 1.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBossTeleporter.class, new RenderSnowball(FakeOres.fragment_boss));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPlayerHunter.class, new RenderPlayerHunter());
-		RenderingRegistry.registerEntityRenderingHandler(EntityFlyer.class, new RenderFlyer());
-		RenderingRegistry.registerEntityRenderingHandler(EntityFlyer_Shield.class, new RenderFlyer_Shield());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySchaza.class, new RenderSchaza());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBlackMage.class, new RenderBlackMage());
-		RenderingRegistry.registerEntityRenderingHandler(EntityMageSpell.class, new RenderMageSpell());
-		RenderingRegistry.registerEntityRenderingHandler(EntityRegenEgg.class, new RenderRegenEgg());
-		RenderingRegistry.registerEntityRenderingHandler(EntityMutantMonster.class, new RenderMutantMonster());
-		RenderingRegistry.registerEntityRenderingHandler(EntityNopeGuy.class, new RenderNopeGuy());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDangerousPlant.class, new RenderDangerousPlant());
-		RenderingRegistry.registerEntityRenderingHandler(EntityNopeGrenade.class, new RenderNopeGrenade(FakeOres.nopeGrenade));
-		MinecraftForgeClient.registerItemRenderer(FakeOres.antiOresBlade, new ItemAntiOresBladeModelRenderer());
-		MinecraftForgeClient.registerItemRenderer(FakeOres.fakeOres_finder, new ItemFakeOresFinderRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBossTeleporter.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), FakeOres.fragment_boss, Minecraft.getMinecraft().getRenderItem()));
 		if(Loader.isModLoaded("IC2"))
 		{
 			RenderingRegistry.registerEntityRenderingHandler(EntityCopperOre.class, new RenderOre(new ModelOre()));
 			RenderingRegistry.registerEntityRenderingHandler(EntityTinOre.class, new RenderOre(new ModelOre()));
 			RenderingRegistry.registerEntityRenderingHandler(EntityUraniumOre.class, new RenderOre(new ModelOre()));
 		}
-		RenderingRegistry.registerEntityRenderingHandler(EntityStalker.class, new RenderStalker(new ModelBiped(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMazeCreature.class, new RenderMazeCreature());
-	}
-	public void spawnParticle(World world, String name, double x, double y, double z)
-	{
-		EntityFX fx = null;
-		if(name == "smoke")
-		{
-			fx = new EntityCustomSmokeFX(world, x, y, z, 0.0D, 0.0D, 0.0D, 1F, FakeOres.texture_CustomSmokeFX_particle.getIconFromDamage(0));
-		}else if(name == "blood")
-		{
-			fx = new EntityBloodFX(world, x, y, z, 1F);
-		}else if(name == "nope")
-		{
-			fx = new EntityNopeFX(world, x, y, z, 0.0D, 0.0D, 0.0D, 1F, world.rand.nextInt(1) == 0? 2F : 0, world.rand.nextInt(1) == 0? 2F : 0F,world.rand.nextInt(1) == 0? 2F : 0F);
-		}
-		Minecraft.getMinecraft().effectRenderer.addEffect(fx);
+
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeDiamond), 0, new ModelResourceLocation("fakeores:fakeDiamond", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeEmerald), 0, new ModelResourceLocation("fakeores:fakeEmerald", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeGold), 0, new ModelResourceLocation("fakeores:fakeGold", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeIron), 0, new ModelResourceLocation("fakeores:fakeIron", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeCoal), 0, new ModelResourceLocation("fakeores:fakeCoal", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeRedstone), 0, new ModelResourceLocation("fakeores:fakeRedstone", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeQuartz), 0, new ModelResourceLocation("fakeores:fakeQuartz", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeLapis), 0, new ModelResourceLocation("fakeores:fakeLapis", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.antiOreStone), 0, new ModelResourceLocation("fakeores:antiOreStone", "inventory"));
+
 	}
 }
