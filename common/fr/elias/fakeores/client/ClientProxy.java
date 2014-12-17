@@ -51,7 +51,15 @@ public class ClientProxy extends StaticProxy {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeRedstone), 0, new ModelResourceLocation("fakeores:fakeRedstone", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeQuartz), 0, new ModelResourceLocation("fakeores:fakeQuartz", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.fakeLapis), 0, new ModelResourceLocation("fakeores:fakeLapis", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.antiOreStone), 0, new ModelResourceLocation("fakeores:antiOreStone", "inventory"));
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(FakeOres.antiOreStone), 0, new ModelResourceLocation("fakeores:antiOreStone", "inventory"));
+
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(FakeOres.antiOresBlade, 0, new ModelResourceLocation("fakeores:antiOresBlade", "inventory"));
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(FakeOres.fragment_part1, 0, new ModelResourceLocation("fakeores:bossframe_part1", "inventory"));
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(FakeOres.fragment_part2, 0, new ModelResourceLocation("fakeores:bossframe_part2", "inventory"));
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(FakeOres.fragment_part3, 0, new ModelResourceLocation("fakeores:bossframe_part3", "inventory"));
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(FakeOres.fragment_part4, 0, new ModelResourceLocation("fakeores:bossframe_part4", "inventory"));
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(FakeOres.fragment_boss, 0, new ModelResourceLocation("fakeores:boss_frame", "inventory"));
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(FakeOres.fragment_boss, 0, new ModelResourceLocation("fakeores:oreBoss_Star", "inventory"));
 
 	}
 }
