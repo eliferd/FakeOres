@@ -1,154 +1,149 @@
 package fr.elias.fakeores.dimension;
 
+import fr.elias.fakeores.common.FakeOres;
+import fr.elias.fakeores.common.entity.EntityDangerousPlant;
+import fr.elias.fakeores.common.entity.EntityFlyer;
+import fr.elias.fakeores.common.entity.EntityNopeGuy;
+import fr.elias.fakeores.common.entity.EntityPlayerHunter;
+import fr.elias.fakeores.common.entity.EntityRegenEgg;
+import fr.elias.fakeores.common.entity.EntitySchaza;
+import fr.elias.fakeores.common.entity.EntityStalker;
+
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import fr.elias.fakeores.common.EntityDangerousPlant;
-import fr.elias.fakeores.common.EntityFlyer;
-import fr.elias.fakeores.common.EntityNopeGuy;
-import fr.elias.fakeores.common.EntityPlayerHunter;
-import fr.elias.fakeores.common.EntityRegenEgg;
-import fr.elias.fakeores.common.EntitySchaza;
-import fr.elias.fakeores.common.EntityStalker;
-import fr.elias.fakeores.common.FakeOres;
+import net.minecraft.world.chunk.ChunkPrimer;
 
 public class BiomeGenOreDimension extends BiomeGenBase
 {
-
-	public BiomeGenOreDimension(int par1)
-	{
-		super(par1);
-		this.spawnableMonsterList.clear();
-		this.spawnableCreatureList.clear();
-		this.spawnableWaterCreatureList.clear();
-		this.spawnableCaveCreatureList.clear();
-		if(FakeOres.spawn_PlayerHunter)
-		{
-			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityPlayerHunter.class, 12, 1, 2));
-		}
-		if(FakeOres.spawn_Flyer)
-		{
-			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityFlyer.class, 12, 2, 5));
-		}
-		if(FakeOres.spawn_Schaza)
-		{
-			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySchaza.class, 12, 2, 8));
-		}
-		if(FakeOres.spawn_RegenEgg)
-		{
-			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityRegenEgg.class, 5, 1, 1));
-		}
-		if(FakeOres.spawn_NopeGuy)
-		{
-			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityNopeGuy.class, 12, 1, 3));
-		}
-		if(FakeOres.spawn_DangerousPlant)
-		{
-			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityDangerousPlant.class, 5, 1, 1));
-		}
-		if(FakeOres.spawn_Stalker)
-		{
-			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityStalker.class, 12, 1, 1));
-		}
-		this.topBlock = FakeOres.fd_grass;
-		this.fillerBlock = FakeOres.fd_dirt;
-		this.setBiomeName("FakeOresBiome");
-		this.rainfall = 0.0F;
-		this.temperature = 1F;
-	}
-    public void generateTerrainBlocks(World p_150573_1_, Random p_150573_2_, Block[] p_150573_3_, byte[] p_150573_4_, int p_150573_5_, int p_150573_6_, double p_150573_7_)
+    public BiomeGenOreDimension(int par1)
     {
-        this.generateBiomeTerrain(p_150573_1_, p_150573_2_, p_150573_3_, p_150573_4_, p_150573_5_, p_150573_6_, p_150573_7_);
-    }
-    public final void generateBiomeTerrain(World p_150560_1_, Random p_150560_2_, Block[] p_150560_3_, byte[] p_150560_4_, int p_150560_5_, int p_150560_6_, double p_150560_7_)
-    {
-    	super.genBiomeTerrain(p_150560_1_, p_150560_2_, p_150560_3_, p_150560_4_, p_150560_5_, p_150560_6_, p_150560_7_);
-        boolean flag = true;
-        Block block = this.topBlock;
-        byte b0 = (byte)(this.field_150604_aj & 255);
-        Block block1 = this.fillerBlock;
-        int k = -1;
-        int l = (int)(p_150560_7_ / 3.0D + 3.0D + p_150560_2_.nextDouble() * 0.25D);
-        int i1 = p_150560_5_ & 15;
-        int j1 = p_150560_6_ & 15;
-        int k1 = p_150560_3_.length / 256;
-
-        for (int l1 = 255; l1 >= 0; --l1)
+        super(par1);
+        this.spawnableMonsterList.clear();
+        this.spawnableCreatureList.clear();
+        this.spawnableWaterCreatureList.clear();
+        this.spawnableCaveCreatureList.clear();
+        if(FakeOres.spawn_PlayerHunter)
         {
-            int i2 = (j1 * 16 + i1) * k1 + l1;
+            this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityPlayerHunter.class, 12, 1, 2));
+        }
+        if(FakeOres.spawn_Flyer)
+        {
+            this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityFlyer.class, 12, 2, 5));
+        }
+        if(FakeOres.spawn_Schaza)
+        {
+            this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySchaza.class, 12, 2, 8));
+        }
+        if(FakeOres.spawn_RegenEgg)
+        {
+            this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityRegenEgg.class, 5, 1, 1));
+        }
+        if(FakeOres.spawn_NopeGuy)
+        {
+            this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityNopeGuy.class, 12, 1, 3));
+        }
+        if(FakeOres.spawn_DangerousPlant)
+        {
+            this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityDangerousPlant.class, 5, 1, 1));
+        }
+        if(FakeOres.spawn_Stalker)
+        {
+            this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityStalker.class, 12, 1, 1));
+        }
+        this.topBlock = FakeOres.fd_grass.getDefaultState();
+        this.fillerBlock = FakeOres.fd_dirt.getDefaultState();
+        this.setBiomeName("FakeOresBiome");
+        this.rainfall = 0.0F;
+        this.temperature = 1F;
+    }
 
-            if (l1 <= 0 + p_150560_2_.nextInt(5))
+    @Override
+    public void genTerrainBlocks(World world, Random rand, ChunkPrimer primer, int p_180622_4_, int p_180622_5_, double p_180622_6_)
+    {
+        this.genBiomeTerrain(world, rand, primer, p_180622_4_, p_180622_5_, p_180622_6_);
+    }
+
+    public final void genBiomeTerrain(World world, Random rand, ChunkPrimer primer, int p_180628_4_, int p_180628_5_, double p_180628_6_)
+    {
+        boolean flag = true;
+        IBlockState block = this.topBlock;
+        IBlockState block1 = this.fillerBlock;
+        int k = -1;
+        int l = (int)(p_180628_6_ / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+        int i1 = p_180628_4_ & 15;
+        int j1 = p_180628_5_ & 15;
+
+        for(int k1 = 255; k1 >= 0; --k1)
+        {
+            if(k1 <= 0 + rand.nextInt(5))
             {
-                p_150560_3_[i2] = Blocks.bedrock;
+                primer.setBlockState(j1, k1, i1, Blocks.bedrock.getDefaultState());
             }
             else
             {
-                Block block2 = p_150560_3_[i2];
+                IBlockState block2 = primer.getBlockState(j1, k1, i1);
 
-                if (block2 != null && block2.getMaterial() != Material.air)
+                if(block2.getBlock().getMaterial() != Material.air)
                 {
-                    if (block2 == FakeOres.fd_stone)
+                    if(block2.getBlock() == FakeOres.fd_stone)
                     {
-                        if (k == -1)
+                        if(k == -1)
                         {
-                            if (l <= 0)
+                            if(l <= 0)
                             {
                                 block = null;
-                                b0 = 0;
-                                block1 = FakeOres.fd_stone;
+                                block1 = FakeOres.fd_stone.getDefaultState();
                             }
-                            else if (l1 >= 59 && l1 <= 64)
+                            else if(k1 >= 59 && k1 <= 64)
                             {
                                 block = this.topBlock;
-                                b0 = (byte)(this.field_150604_aj & 255);
                                 block1 = this.fillerBlock;
                             }
 
-                            if (l1 < 63 && (block == null || block.getMaterial() == Material.air))
+                            if(k1 < 63 && (block == null || block.getBlock().getMaterial() == Material.air))
                             {
-                                if (this.getFloatTemperature(p_150560_5_, l1, p_150560_6_) < 0.15F)
+                                if(this.getFloatTemperature(new BlockPos(p_180628_4_, k1, p_180628_5_)) < 0.15F)
                                 {
-                                    block = Blocks.ice;
-                                    b0 = 0;
+                                    block = Blocks.ice.getDefaultState();
                                 }
                                 else
                                 {
-                                    block = FakeOres.fd_strangeliquid;
-                                    b0 = 0;
+                                    block = FakeOres.fd_strangeliquid.getDefaultState();
                                 }
                             }
 
                             k = l;
 
-                            if (l1 >= 62)
+                            if(k1 >= 62)
                             {
-                                p_150560_3_[i2] = block;
-                                p_150560_4_[i2] = b0;
+                                primer.setBlockState(j1, k1, i1, block);
                             }
-                            else if (l1 < 56 - l)
+                            else if(k1 < 56 - l)
                             {
                                 block = null;
-                                block1 = FakeOres.fd_stone;
-                                p_150560_3_[i2] = FakeOres.fd_stone;
+                                block1 = FakeOres.fd_stone.getDefaultState();
+                                primer.setBlockState(j1, k1, i1, FakeOres.fd_stone.getDefaultState());
                             }
                             else
                             {
-                                p_150560_3_[i2] = block1;
+                                primer.setBlockState(j1, k1, i1, block1);
                             }
                         }
-                        else if (k > 0)
+                        else if(k > 0)
                         {
                             --k;
-                            p_150560_3_[i2] = block1;
+                            primer.setBlockState(j1, k1, i1, block1);
 
-                            if (k == 0 && block1 == Blocks.sand)
+                            if(k == 0 && block1 == Blocks.sand)
                             {
-                                k = p_150560_2_.nextInt(4) + Math.max(0, l1 - 63);
-                                block1 = Blocks.sandstone;
+                                k = rand.nextInt(4) + Math.max(0, k1 - 63);
+                                block1 = Blocks.sandstone.getDefaultState();
                             }
                         }
                     }

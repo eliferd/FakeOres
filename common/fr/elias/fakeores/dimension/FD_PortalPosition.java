@@ -1,24 +1,14 @@
 package fr.elias.fakeores.dimension;
 
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.BlockPos;
 
-public class FD_PortalPosition extends ChunkCoordinates
+public class FD_PortalPosition extends BlockPos
 {
-	public long time;
-	final FD_Teleporter teleporter;
-	
-	public FD_PortalPosition(FD_Teleporter fd_teleporter, int x, int y, int z, long creationTime)
-	{
-		super(x, y, z);
-		this.teleporter = fd_teleporter;
-		this.time = creationTime;
-	}
-	
-	@Override
-	public int compareTo(Object o)
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public long lastUpdateTime;
 
+    public FD_PortalPosition(BlockPos pos, long creationTime)
+    {
+        super(pos.getX(), pos.getY(), pos.getZ());
+        this.lastUpdateTime = creationTime;
+    }
 }
